@@ -28,7 +28,7 @@ public class TreatmentView {
         SpecificAvroSerde<Encounter> serde = new SpecificAvroSerde<>();
         final Map<String, String>
                 config =
-                Map.of(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, srUrl);
+                Map.of(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8085");
         serde.configure(config, false);
         return serde;
     }

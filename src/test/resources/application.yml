@@ -16,25 +16,20 @@ spring:
       repositories:
         bootstrap-mode: default
   kafka:
+    properties:
+      schema:
+        registry:
+          url: http://localhost:8085
     consumer:
       bootstrap-servers: localhost:9092
       group-id: group_id # TODO: find meaning
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-      # Specifies comma-delimited list of package patterns allowed for deserialization. '*' means deserialize all packages.
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: '*'
     producer:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
     streams:
       application-id: kafka-demo
-    properties:
-      schema:
-        registry:
-          url: http://localhost:8085
+debug: true

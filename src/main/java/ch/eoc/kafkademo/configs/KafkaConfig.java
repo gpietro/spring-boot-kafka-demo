@@ -2,10 +2,8 @@ package ch.eoc.kafkademo.configs;
 
 import ch.eoc.kafkademo.schema.Encounter;
 import ch.eoc.kafkademo.schema.EncounterStatus;
-import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
-import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import org.apache.kafka.clients.admin.NewTopic;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,23 +11,18 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import java.util.Map;
-
 @Configuration
 public class KafkaConfig {
-
-    @Value("${spring.kafka.properties.schema.registry.url}")
-    String srUrl;
 
     @Bean
     public NewTopic topicTreatments() {
         return TopicBuilder.name("treatments").partitions(1).replicas(1).build();
     }
 
-	// Testing the kafka messages
+    // Testing the kafka messages
     @KafkaListener(id="treatmentId", topics="treatments")
-	public void listener(Encounter encounter) {
-		System.out.println(encounter.toString());
+	public void listener(ConsumerRecord<String, Object> record) {
+		System.out.println(record.value().toString());
 	}
 
     @Bean
