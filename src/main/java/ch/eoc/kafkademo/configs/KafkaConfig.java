@@ -15,8 +15,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 public class KafkaConfig {
 
     @Bean
-    public NewTopic topicTreatments() {
-        return TopicBuilder.name("treatments").partitions(1).replicas(1).build();
+    public NewTopic topicLocationEvents() {
+        return TopicBuilder.name("adt.events.location").partitions(1).replicas(1).build();
     }
 
     // Testing the kafka messages
@@ -25,6 +25,7 @@ public class KafkaConfig {
 		System.out.println(record.value().toString());
 	}
 
+	/*
     @Bean
     public ApplicationRunner runner(KafkaTemplate<String, Encounter> template) {
         return args -> {
@@ -35,4 +36,5 @@ public class KafkaConfig {
             template.send("treatments", "1", new Encounter(1L, EncounterStatus.FINISHED, 1L));
         };
     }
+	 */
 }

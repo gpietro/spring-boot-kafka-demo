@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "ch.eoc.kafkademo.schema",
+  "name": "EventPatientCheckedOut",
+  "version": "1",
+  "fields": [
+    {
+      "name": "patientId",
+      "type": "long"
+    },
+    {
+      "name": "treatmentId",
+      "type": "long"
+    }
+  ]
+}

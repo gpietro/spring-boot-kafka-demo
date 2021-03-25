@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "namespace": "ch.eoc.kafkademo.schema",
+  "name": "EventPatientRoomChanged",
+  "version": "1",
+  "fields": [
+    {
+      "name": "patientId",
+      "type": "long"
+    },
+    {
+      "name": "treatmentId",
+      "type": "long"
+    },
+    {
+      "name": "roomId",
+      "type": "long"
+    }
+  ]
+}

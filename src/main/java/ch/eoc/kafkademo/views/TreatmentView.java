@@ -20,7 +20,7 @@ public class TreatmentView {
     String srUrl;
 
     public void buildTreatmentView(StreamsBuilder builder) {
-        final Serde<Encounter> valueSpecificAvroSerde = new SpecificAvroSerde<>();
+        // final Serde<Encounter> valueSpecificAvroSerde = new SpecificAvroSerde<>();
         builder.table("treatments", Consumed.with(Serdes.String(), specificAvro()), Materialized.as("treatments-view"));
     }
 
