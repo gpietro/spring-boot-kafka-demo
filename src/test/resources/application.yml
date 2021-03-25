@@ -19,7 +19,7 @@ spring:
     properties:
       schema:
         registry:
-          url: http://localhost:8085
+          url: http://localhost:8081
     consumer:
       bootstrap-servers: localhost:9092
       group-id: group_id # TODO: find meaning
