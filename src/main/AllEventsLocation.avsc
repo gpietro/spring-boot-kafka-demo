@@ -1,0 +1,6 @@
+[
+  "ch.eoc.kafkademo.schema.EventPatientCheckedIn",
+  "ch.eoc.kafkademo.schema.EventPatientCheckedOut",
+  "ch.eoc.kafkademo.schema.EventPatientRoomChanged",
+  "ch.eoc.kafkademo.schema.EventPatientBedChanged"
+]

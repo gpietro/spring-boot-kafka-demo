@@ -12,8 +12,9 @@ public class Consumer {
 
     private Logger logger = LoggerFactory.getLogger(Consumer.class);
 
+    // TODO: what is the meaning and usage of groupId?
     /*
-    @KafkaListener(topics = "patients", groupId = "group_id")
+    @KafkaListener(topics = "", groupId = "group_id")
     public void consume(String message) throws IOException {
         logger.info(String.format("Kafka consumer - message: %s", message));
     }

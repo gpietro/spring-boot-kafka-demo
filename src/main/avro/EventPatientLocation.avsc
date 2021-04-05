@@ -1,7 +1,7 @@
 {
   "type": "record",
   "namespace": "ch.eoc.kafkademo.schema",
-  "name": "EventPatientCheckedIn",
+  "name": "EventPatientLocation",
   "version": "1",
   "fields": [
     {

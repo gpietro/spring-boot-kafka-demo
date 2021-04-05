@@ -9,3 +9,7 @@ This PoC aims to evaluate the usage of Kafka for event sourcing in the developme
 
 ### Visit kafka UI
 - `localhost:8080`
+
+
+### Run ksqldb-cli
+`docker exec -it ksqldb-cli ksql http://ksqldb-server:8088`
