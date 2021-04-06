@@ -38,4 +38,4 @@ spring:
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
     streams:
       application-id: kafka-demo
-debug: true
+# debug: true

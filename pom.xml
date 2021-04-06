@@ -105,6 +105,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.4.3</version>
 			</plugin>
 
 			<plugin>
@@ -118,8 +119,8 @@
 							<goal>schema</goal>
 						</goals>
 						<configuration>
-							<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
-							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+							<sourceDirectory>src/main/avro/</sourceDirectory>
+							<outputDirectory>src/main/java/</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -142,21 +143,21 @@
 							by convention, where the subject name is {topic}-key for the message key and {topic}-value
 							for the message value.
 						-->
-						<adt-events-location-value>src/main/avro/AllEventsLocation.avsc</adt-events-location-value>
+						<adt.events.location-value>src/main/avro-union/AllEventsLocation.avsc</adt.events.location-value>
 						<eventPatientCheckedIn>src/main/avro/EventPatientCheckedIn.avsc</eventPatientCheckedIn>
 						<eventPatientCheckedOut>src/main/avro/EventPatientCheckedOut.avsc</eventPatientCheckedOut>
 						<eventPatientRoomChanged>src/main/avro/EventPatientRoomChanged.avsc</eventPatientRoomChanged>
 						<eventPatientBedChanged>src/main/avro/EventPatientBedChanged.avsc</eventPatientBedChanged>
 					</subjects>
 					<schemaTypes>
-						<adt-events-location-value>AVRO</adt-events-location-value>
+						<adt.events.location-value>AVRO</adt.events.location-value>
 						<eventPatientCheckedIn>AVRO</eventPatientCheckedIn>
 						<eventPatientCheckedOut>AVRO</eventPatientCheckedOut>
 						<eventPatientRoomChanged>AVRO</eventPatientRoomChanged>
 						<eventPatientBedChanged>AVRO</eventPatientBedChanged>
 					</schemaTypes>
 					<references>
-						<adt-events-location-value>
+						<adt.events.location-value>
 							<reference>
 								<name>ch.eoc.kafkademo.schema.EventPatientCheckedIn</name>
 								<subject>eventPatientCheckedIn</subject>
@@ -173,9 +174,9 @@
 								<name>ch.eoc.kafkademo.schema.EventPatientBedChanged</name>
 								<subject>eventPatientBedChanged</subject>
 							</reference>
-						</adt-events-location-value>
+						</adt.events.location-value>
 					</references>
-					<outputDirectory/>
+					<outputDirectory>src/main/java/</outputDirectory>
 				</configuration>
 				<goals>
 					<goal>register</goal>

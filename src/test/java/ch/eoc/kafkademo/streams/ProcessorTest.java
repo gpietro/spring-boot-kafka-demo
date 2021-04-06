@@ -21,8 +21,8 @@ class ProcessorTest {
     private static final String MOCK_SCHEMA_REGISTRY_URL = "mock://" + SCHEMA_REGISTRY_SCOPE;
 
 
-    private static String inputTopic = "adt-events-location";
-    private static String outputTopic = "adt-patient-location";
+    private static String inputTopic = "adt.events.location";
+    private static String outputTopic = "adt.patient.location";
 
     @Test
     public void shouldProcessLocationEvents() throws Exception {
@@ -34,10 +34,10 @@ class ProcessorTest {
         File eventRoomChanged = new File("src/main/avro/EventPatientRoomChanged.avsc");
         File eventBedChanged = new File("src/main/avro/EventPatientBedChanged.avsc");
 
-        schemaRegistryClient.register("adt-events-location", new Schema.Parser().parse(new FileInputStream(eventCheckedIn)));
-        schemaRegistryClient.register("adt-events-location", new Schema.Parser().parse(new FileInputStream(eventCheckedOut)));
-        schemaRegistryClient.register("adt-events-location", new Schema.Parser().parse(new FileInputStream(eventRoomChanged)));
-        schemaRegistryClient.register("adt-events-location", new Schema.Parser().parse(new FileInputStream(eventBedChanged)));
+        schemaRegistryClient.register("adt.events.location", new Schema.Parser().parse(new FileInputStream(eventCheckedIn)));
+        schemaRegistryClient.register("adt.events.location", new Schema.Parser().parse(new FileInputStream(eventCheckedOut)));
+        schemaRegistryClient.register("adt.events.location", new Schema.Parser().parse(new FileInputStream(eventRoomChanged)));
+        schemaRegistryClient.register("adt.events.location", new Schema.Parser().parse(new FileInputStream(eventBedChanged)));
 
 
         /**
@@ -45,7 +45,7 @@ class ProcessorTest {
          * ---
          * String schemaContent = Files.readString(Path.of("src/main/avro/AllEventsLocation.avsc"), StandardCharsets.UTF_8);
          * AvroSchema avroSchema = new AvroSchema(schemaContent);
-         * schemaRegistryClient.register("adt-events-location", avroSchema);
+         * schemaRegistryClient.register("adt.events.location", avroSchema);
          * ---
          */
 
