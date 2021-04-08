@@ -14,10 +14,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-class ProcessorTest {
+class LocationProcessorTest {
 
     // A mocked schema registry for our serdes to use
-    private static final String SCHEMA_REGISTRY_SCOPE = ProcessorTest.class.getName();
+    private static final String SCHEMA_REGISTRY_SCOPE = LocationProcessorTest.class.getName();
     private static final String MOCK_SCHEMA_REGISTRY_URL = "mock://" + SCHEMA_REGISTRY_SCOPE;
 
 
