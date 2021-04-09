@@ -14,7 +14,6 @@ import java.util.Date;
 public class Patient implements Serializable {
 
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
