@@ -26,6 +26,7 @@ class LocationProcessorTest {
 
     @Test
     public void shouldProcessLocationEvents() throws Exception {
+        /*
         // Register multiple schemas?
         final SchemaRegistryClient schemaRegistryClient = MockSchemaRegistry.getClientForScope(SCHEMA_REGISTRY_SCOPE);
 
@@ -38,7 +39,7 @@ class LocationProcessorTest {
         schemaRegistryClient.register("adt.events.location", new Schema.Parser().parse(new FileInputStream(eventCheckedOut)));
         schemaRegistryClient.register("adt.events.location", new Schema.Parser().parse(new FileInputStream(eventRoomChanged)));
         schemaRegistryClient.register("adt.events.location", new Schema.Parser().parse(new FileInputStream(eventBedChanged)));
-
+         */
 
         /**
          * Not deprecated way...
@@ -49,6 +50,8 @@ class LocationProcessorTest {
          * ---
          */
 
+        /*
+
         final StreamsBuilder builder = new StreamsBuilder();
 
         final Properties streamsConfiguration = new Properties();
@@ -57,6 +60,8 @@ class LocationProcessorTest {
         streamsConfiguration.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         streamsConfiguration.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, GenericAvroSerde.class);
         streamsConfiguration.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, MOCK_SCHEMA_REGISTRY_URL);
+
+         */
 
     }
 

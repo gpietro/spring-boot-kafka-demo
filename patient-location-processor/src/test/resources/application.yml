@@ -12,24 +12,30 @@ spring:
     username: sa
     password: password
   data:
-    jpa:
-      repositories:
-        bootstrap-mode: default
+    jpa.repositories.bootstrap-mode: default
   kafka:
     properties:
+      auto.register.schemas: false
+      use.latest.version: true
       schema:
         registry:
           url: http://localhost:8081
+          basic.auth.user.info:
+      basic.auth.credentials.source:
     consumer:
       bootstrap-servers: localhost:9092
-      group-id: group_id # TODO: find meaning
+      group-id: patient-location
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
     producer:
       bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
     streams:
-      application-id: patient-location-processor
-debug: true
+      application-id: LocationService
+      properties:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$LongSerde
+        default.value-deserializer: io.confluent.kafka.streams.serdes.avro.GenericAvroDeserializer
+        default.value-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+# debug: true
