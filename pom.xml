@@ -10,6 +10,7 @@
 
     <modules>
         <module>patient-location-processor</module>
-        <module>patient-crud-admin</module>
+        <module>patient-admin</module>
+        <module>patient-streams</module>
     </modules>
 </project>

@@ -61,7 +61,7 @@ public class LocationProcessor {
             @Override
             public EventPatientLocation transform(final GenericRecord eventLocation) {
                 EventPatientLocation patientLocation = new EventPatientLocation();
-                if("EventPatientCheckedIn".equals(eventLocation.getSchema().getName())) {
+                if ("EventPatientCheckedIn".equals(eventLocation.getSchema().getName())) {
                     EventPatientCheckedIn patientCheckedIn = (EventPatientCheckedIn) SpecificData.get().deepCopy(EventPatientCheckedIn.SCHEMA$, eventLocation);
                     patientLocation.setType("Patient checked in!");
                     patientLocation.setPatientId(patientCheckedIn.getPatientId());
@@ -69,7 +69,7 @@ public class LocationProcessor {
                     patientLocation.setWardId(patientCheckedIn.getWardId());
                     patientLocation.setRoomId(patientCheckedIn.getRoomId());
                     patientLocation.setBedId(patientCheckedIn.getBedId());
-                } else if("EventPatientCheckedOut".equals(eventLocation.getSchema().getName())) {
+                } else if ("EventPatientCheckedOut".equals(eventLocation.getSchema().getName())) {
                     EventPatientCheckedOut patientCheckedOut = (EventPatientCheckedOut) SpecificData.get().deepCopy(EventPatientCheckedOut.SCHEMA$, eventLocation);
                     patientLocation.setType("Patient checked out!");
                     patientLocation.setPatientId(patientCheckedOut.getPatientId());

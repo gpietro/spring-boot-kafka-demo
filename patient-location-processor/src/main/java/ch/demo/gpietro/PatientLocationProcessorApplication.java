@@ -10,9 +10,9 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 @EnableKafkaStreams
 public class PatientLocationProcessorApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PatientLocationProcessorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PatientLocationProcessorApplication.class, args);
+    }
 
 
 }

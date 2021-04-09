@@ -30,6 +30,7 @@ public class LocationController {
     /**
      * Configuring this Bean allows Avro objects to be serialized by
      * Jackson, otherwise, it attempts to serialize non-data values
+     *
      * @return
      */
     @Bean

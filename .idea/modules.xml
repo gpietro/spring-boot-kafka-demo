@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/patient-crud-admin/patient-crud-admin.iml" filepath="$PROJECT_DIR$/patient-crud-admin/patient-crud-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adt-kafka-poc.iml" filepath="$PROJECT_DIR$/adt-kafka-poc.iml" />
       <module fileurl="file://$PROJECT_DIR$/patient-location-processor/patient-location-processor.iml" filepath="$PROJECT_DIR$/patient-location-processor/patient-location-processor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spring-boot-kafka-demo.iml" filepath="$PROJECT_DIR$/spring-boot-kafka-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/patient-streams/patient-streams.iml" filepath="$PROJECT_DIR$/patient-streams/patient-streams.iml" />
+      <module fileurl="file://$PROJECT_DIR$/patient-strems.iml" filepath="$PROJECT_DIR$/patient-strems.iml" />
     </modules>
   </component>
 </project>

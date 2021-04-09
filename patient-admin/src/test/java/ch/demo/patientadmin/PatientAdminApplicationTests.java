@@ -1,10 +1,10 @@
-package ch.demo.gpietro;
+package ch.demo.patientadmin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PatientLocationProcessorApplicationTests {
+class PatientAdminApplicationTests {
 
     @Test
     void contextLoads() {

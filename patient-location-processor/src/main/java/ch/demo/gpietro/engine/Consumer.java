@@ -14,7 +14,7 @@ public class Consumer {
 
     // TODO: what is the meaning of KafkaListener id?
     // Testing the kafka messages
-    @KafkaListener(id="location", topics="adt.events.location")
+    @KafkaListener(id = "location", topics = "adt.events.location")
     public void listener(ConsumerRecord<String, GenericRecord> record) {
         System.out.println("Consuming schema: " + record.value().getSchema().getName());
     }
