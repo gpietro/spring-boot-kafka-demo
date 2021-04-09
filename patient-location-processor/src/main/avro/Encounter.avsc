@@ -1,0 +1,29 @@
+{
+  "type": "record",
+  "namespace": "ch.demo.gpietro.schema",
+  "name": "Encounter",
+  "version": "1",
+  "fields": [
+    {
+      "name": "encounterId",
+      "type": "long",
+      "doc": "Encounter id"
+    },
+    {
+      "name": "status",
+      "type": {
+        "name": "EncounterStatus",
+        "type": "enum",
+        "symbols": [
+          "PLANNED", "ARRIVED", "TRIAGED", "INPROGRESS", "ONLEAVE", "FINISHED", "CANCELLED"
+        ]
+      },
+      "doc": "Encounter status"
+    },
+    {
+      "name": "patientId",
+      "type": "long",
+      "doc": "Patient id"
+    }
+  ]
+}

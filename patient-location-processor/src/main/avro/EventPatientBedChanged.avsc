@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "namespace": "ch.demo.gpietro.schema",
+  "name": "EventPatientBedChanged",
+  "version": "1",
+  "fields": [
+    {
+      "name": "patientId",
+      "type": "long"
+    },
+    {
+      "name": "treatmentId",
+      "type": "long"
+    },
+    {
+      "name": "bedId",
+      "type": "long"
+    }
+  ]
+}

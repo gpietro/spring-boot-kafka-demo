@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>ch.eoc</groupId>
+	<artifactId>patient-location-processor</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>patient-location-processor</name>
+	<description>Demo project for Kafka</description>
+	<properties>
+		<java.version>11</java.version>
+		<confluent.version>6.1.0</confluent.version>
+	</properties>
+	<repositories>
+		<repository>
+			<id>confluent</id>
+			<name>Confluent</name>
+			<url>http://packages.confluent.io/maven/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-streams</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>2.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>1.10.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<version>${confluent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-streams-avro-serde</artifactId>
+			<version>${confluent.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-schema-registry-client</artifactId>
+			<version>${confluent.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.4.3</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.10.1</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>schema</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>io.confluent</groupId>
+				<artifactId>kafka-schema-registry-maven-plugin</artifactId>
+				<version>${confluent.version}</version>
+				<configuration>
+					<schemaRegistryUrls>
+						<param>http://127.0.0.1:8081</param>
+					</schemaRegistryUrls>
+					<subjects>
+						<!--
+							## TopicNameStrategy
+
+							Subject-topic constraints: When using the default TopicNameStrategy, a subject can constrain
+							the collection of messages in a topic. The association between the subject and the topic is
+							by convention, where the subject name is {topic}-key for the message key and {topic}-value
+							for the message value.
+						-->
+						<adt.events.location-value>${project.basedir}/src/main/avro-union/AllEventsLocation.avsc</adt.events.location-value>
+						<eventPatientCheckedIn>${project.basedir}/src/main/avro/EventPatientCheckedIn.avsc</eventPatientCheckedIn>
+						<eventPatientCheckedOut>${project.basedir}/src/main/avro/EventPatientCheckedOut.avsc</eventPatientCheckedOut>
+						<eventPatientRoomChanged>${project.basedir}/src/main/avro/EventPatientRoomChanged.avsc</eventPatientRoomChanged>
+						<eventPatientBedChanged>${project.basedir}/src/main/avro/EventPatientBedChanged.avsc</eventPatientBedChanged>
+					</subjects>
+					<schemaTypes>
+						<adt.events.location-value>AVRO</adt.events.location-value>
+						<eventPatientCheckedIn>AVRO</eventPatientCheckedIn>
+						<eventPatientCheckedOut>AVRO</eventPatientCheckedOut>
+						<eventPatientRoomChanged>AVRO</eventPatientRoomChanged>
+						<eventPatientBedChanged>AVRO</eventPatientBedChanged>
+					</schemaTypes>
+					<references>
+						<adt.events.location-value>
+							<reference>
+								<name>ch.demo.gpietro.schema.EventPatientCheckedIn</name>
+								<subject>eventPatientCheckedIn</subject>
+							</reference>
+							<reference>
+								<name>ch.demo.gpietro.schema.EventPatientCheckedOut</name>
+								<subject>eventPatientCheckedOut</subject>
+							</reference>
+							<reference>
+								<name>ch.demo.gpietro.schema.EventPatientRoomChanged</name>
+								<subject>eventPatientRoomChanged</subject>
+							</reference>
+							<reference>
+								<name>ch.demo.gpietro.schema.EventPatientBedChanged</name>
+								<subject>eventPatientBedChanged</subject>
+							</reference>
+						</adt.events.location-value>
+					</references>
+					<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+				</configuration>
+				<goals>
+					<goal>register</goal>
+				</goals>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

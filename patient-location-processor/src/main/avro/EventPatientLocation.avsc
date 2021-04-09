@@ -1,0 +1,32 @@
+{
+  "type": "record",
+  "namespace": "ch.demo.gpietro.schema",
+  "name": "EventPatientLocation",
+  "version": "1",
+  "fields": [
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "patientId",
+      "type": "long"
+    },
+    {
+      "name": "treatmentId",
+      "type": "long"
+    },
+    {
+      "name": "wardId",
+      "type": "long"
+    },
+    {
+      "name": "roomId",
+      "type": "long"
+    },
+    {
+      "name": "bedId",
+      "type": "long"
+    }
+  ]
+}

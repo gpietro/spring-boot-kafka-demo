@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="patient-location-processor" />
+        <module name="patient-crud-admin" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="adt-kafka-poc" target="1.5" />
+      <module name="kafka-demo" target="11" />
+      <module name="patient-crud-admin" target="11" />
+      <module name="patient-location-processor" target="11" />
+      <module name="spring-boot-kafka-demo" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="kafka-demo" options="-parameters" />
+      <module name="patient-crud-admin" options="-parameters" />
+      <module name="patient-location-processor" options="-parameters" />
+    </option>
+  </component>
+</project>
