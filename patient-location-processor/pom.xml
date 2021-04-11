@@ -15,13 +15,12 @@
     <description>Demo project for Kafka</description>
     <properties>
         <java.version>11</java.version>
-        <confluent.version>6.1.0</confluent.version>
+        <confluent.version>6.1.1</confluent.version>
     </properties>
     <repositories>
         <repository>
             <id>confluent</id>
-            <name>Confluent</name>
-            <url>http://packages.confluent.io/maven/</url>
+            <url>https://packages.confluent.io/maven/</url>
         </repository>
     </repositories>
     <pluginRepositories>
