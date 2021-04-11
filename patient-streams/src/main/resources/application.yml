@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: patient-streams
+  cloud:
+    stream:
+      bindings:
+        process-in-0:
+          destination: mysql.admindb.patients
+          group: patientStreamsGroup
+          consumer:
+            useNativeDecoding: true
+        process-out-0:
+          destination: store.streams.patients
+          producer:
+            useNativeEncoding: true
+      kafka:
+        streams:
+          binder:
+            configuration:
+              schema.registry.url: http://${SCHEMA_REGISTRY_HOST:localhost}:${SCHEMA_REGISTRY_PORT:8081}
+          bindings:
+            process-in-0:
+              consumer:
+                valueSerde: ch.demo.gpietro.patientstreams.serde.avro.PatientAvroSerde

@@ -28,7 +28,7 @@ public class PatientController {
         return new ResponseEntity<>(patient, HttpStatus.OK);
     }
 
-    @GetMapping("/patietns")
+    @GetMapping("/patients")
     public ResponseEntity<List<Patient>> getPatients() {
         List<Patient> patients = patientService.findAll();
         return new ResponseEntity<>(patients, HttpStatus.OK);
