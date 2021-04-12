@@ -20,6 +20,12 @@ curl -i -X POST http://localhost:8083/connectors \
     "timestamp.column.name": "updated_at",
     "incrementing.column.name": "id",
     "topic.prefix": "mysql.admindb.",
-    "tasks.max": "1"
+    "tasks.max": "1",
+
+    "_comment": "--- Add key to the message based on the entity id field ---",
+    "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.createKey.fields": "id",
+    "transforms.extractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.extractId.field": "id",
   }
 }'

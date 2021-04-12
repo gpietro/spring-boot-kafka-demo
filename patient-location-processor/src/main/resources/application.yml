@@ -4,15 +4,6 @@
 server:
   port: 9000
 spring:
-  h2:
-    console:
-      enabled: true
-  datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: password
-  data:
-    jpa.repositories.bootstrap-mode: default
   kafka:
     properties:
       auto.register.schemas: false
