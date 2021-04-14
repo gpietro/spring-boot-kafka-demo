@@ -2,6 +2,8 @@ package ch.demo.gpietro.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,19 +27,10 @@ public class Patient implements Serializable {
 
     private Date birthDate;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+    @Column(updatable = false)
+    @CreationTimestamp
+    private Date createdAt;
 
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    public void onPrePersist() {
-        createdAt = updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void onPreUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+    @UpdateTimestamp
+    private Date updatedAt;
 }

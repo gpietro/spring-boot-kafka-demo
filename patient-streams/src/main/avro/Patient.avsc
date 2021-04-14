@@ -35,12 +35,12 @@
     },
     {
       "name": "birth_date",
-      "type": {
+      "type": ["null", {
         "type": "long",
         "connect.version": 1,
         "connect.name": "org.apache.kafka.connect.data.Timestamp",
         "logicalType": "timestamp-millis"
-      }
+      }]
     }
   ]
 }

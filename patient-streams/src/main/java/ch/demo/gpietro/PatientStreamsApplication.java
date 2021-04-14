@@ -1,15 +1,16 @@
 package ch.demo.gpietro;
 
-import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.TopicBuilder;
 
 @SpringBootApplication
+@EnableKafkaStreams
 public class PatientStreamsApplication {
 
 	public static void main(String[] args) {
@@ -23,7 +24,9 @@ public class PatientStreamsApplication {
 	}
 
 	@KafkaListener(groupId = "storeStreamsGroup", topics = "mysql.admindb.patients")
-	public void listener(ConsumerRecord<String, GenericRecord> record) {
-		System.out.println("Consuming schema: " + record.value().getSchema().getName());
+	public void listener(ConsumerRecord<String, String> record) {
+		System.out.println("Consuming record: " + record.key() + record.value());
+		System.out.println("Consuming schema: " + record.value());
+		// TODO: missing topic configuration application.yml (deserializer) - process-out-*?
 	}
 }

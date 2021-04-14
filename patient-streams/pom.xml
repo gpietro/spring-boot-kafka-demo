@@ -67,7 +67,13 @@
 			<artifactId>kafka-avro-serializer</artifactId>
 			<version>6.1.0</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams-test-utils</artifactId>
+            <version>2.6.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

@@ -15,20 +15,8 @@
     <description>Demo project for Kafka</description>
     <properties>
         <java.version>11</java.version>
-        <confluent.version>6.1.1</confluent.version>
+        <confluent.version>6.1.0</confluent.version>
     </properties>
-    <repositories>
-        <repository>
-            <id>confluent</id>
-            <url>https://packages.confluent.io/maven/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>confluent</id>
-            <url>https://packages.confluent.io/maven/</url>
-        </pluginRepository>
-    </pluginRepositories>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -188,4 +176,16 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

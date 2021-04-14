@@ -11,5 +11,5 @@ This PoC aims to evaluate the usage of Kafka for event sourcing in the developme
 
 ### Run ksqldb-cli
 - `docker exec -it ksqldb-cli ksql http://ksqldb-server:8088`
-- `show topics`
-- `print 'topic-name' FROM BEGINNING`
+- `show topics;`
+- `print 'topic-name' FROM BEGINNING;`

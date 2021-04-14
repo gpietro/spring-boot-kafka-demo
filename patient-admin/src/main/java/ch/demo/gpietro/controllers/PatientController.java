@@ -47,6 +47,7 @@ public class PatientController {
     @PutMapping("/patients/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePatient(@PathVariable("id") long id, @RequestBody Patient patient) {
+        patient.setId(id);
         patientService.save(patient);
     }
 
