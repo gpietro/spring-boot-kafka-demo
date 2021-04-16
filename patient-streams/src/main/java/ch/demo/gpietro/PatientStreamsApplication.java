@@ -1,32 +1,25 @@
 package ch.demo.gpietro;
 
 import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.annotation.EnableKafkaStreams;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.TopicBuilder;
 
 @SpringBootApplication
-@EnableKafkaStreams
 public class PatientStreamsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PatientStreamsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PatientStreamsApplication.class, args);
+    }
 
+    @Bean
+    public NewTopic topicStorePatients() {
+        return TopicBuilder.name("mysql.admindb.patients").partitions(1).replicas(1).build();
+    }
 
-	@Bean
-	public NewTopic topicStorePatients() {
-		return TopicBuilder.name("mysql.admindb.patients").partitions(1).replicas(1).build();
-	}
-
-	@KafkaListener(groupId = "storeStreamsGroup", topics = "mysql.admindb.patients")
-	public void listener(ConsumerRecord<String, String> record) {
-		System.out.println("Consuming record: " + record.key() + record.value());
-		System.out.println("Consuming schema: " + record.value());
-		// TODO: missing topic configuration application.yml (deserializer) - process-out-*?
-	}
+    @Bean
+    public NewTopic topicOutputBoardPatients() {
+        return TopicBuilder.name("board.patient.location").partitions(1).replicas(1).build();
+    }
 }

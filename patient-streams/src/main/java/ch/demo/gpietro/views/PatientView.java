@@ -1,21 +1,55 @@
 package ch.demo.gpietro.views;
 
+import ch.demo.gpietro.schema.BoardLocation;
+import ch.demo.gpietro.schema.EventPatientLocation;
 import ch.demo.gpietro.schema.Patient;
-import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
-import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
-import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.kstream.Consumed;
-import org.apache.kafka.streams.kstream.Materialized;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.streams.kstream.GlobalKTable;
+import org.apache.kafka.streams.kstream.KStream;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.util.function.Function;
 
+@Slf4j
 @Component
 public class PatientView {
 
+    @Bean
+    public Function<KStream<Long, EventPatientLocation>,
+            Function<GlobalKTable<String, Patient>,
+                    KStream<Long, BoardLocation>>> process() {
+        return locationKStream -> (
+                patientGlobalKTable -> (
+                        locationKStream.peek(this::logKeyValue)
+                                .join(
+                                        patientGlobalKTable,
+                                        (s, location) -> String.valueOf(location.getPatientId()),
+                                        this::toBoardLocation
+                                )
+                                .peek(this::logKeyValue)
+                )
+        );
+    }
+
+    private void logKeyValue(Long key, Object value) {
+        log.info("==> key: {}, value: {}", key, value);
+    }
+
+    private BoardLocation toBoardLocation(EventPatientLocation eventPatientLocation, Patient patient) {
+        BoardLocation boardLocation = new BoardLocation();
+        boardLocation.setPatientId(eventPatientLocation.getPatientId());
+        boardLocation.setTreatmentId(eventPatientLocation.getTreatmentId());
+        boardLocation.setWardId(eventPatientLocation.getWardId());
+        boardLocation.setRoomId(eventPatientLocation.getRoomId());
+        boardLocation.setBedId(eventPatientLocation.getBedId());
+        boardLocation.setFirstName(patient.getFirstName());
+        boardLocation.setLastName(patient.getLastName());
+        boardLocation.setBirthDate(patient.getBirthDate());
+        return boardLocation;
+    }
+
+    /*
     private String srUrl;
 
     @Autowired
@@ -34,4 +68,5 @@ public class PatientView {
         serde.configure(config, false);
         return serde;
     }
+     */
 }

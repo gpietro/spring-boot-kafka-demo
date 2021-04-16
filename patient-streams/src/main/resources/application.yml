@@ -1,27 +1,38 @@
-server:
-  port: 9999
-spring:
-  application:
-    name: patient-streams
-  cloud:
-    stream:
-      bindings:
-        process-in-0:
-          destination: mysql.admindb.patients
-          group: storeStreamsGroup
-          consumer:
-            useNativeDecoding: true
-#        process-out-0:
-#          destination: store.streams.patients
-#          producer:
-#            useNativeEncoding: true
-      kafka:
-        streams:
-          binder:
-            configuration:
-              schema.registry.url: http://${SCHEMA_REGISTRY_HOST:localhost}:${SCHEMA_REGISTRY_PORT:8081}
-          bindings:
-            process-in-0:
-              patient:
-                keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
-                valueSerde: ch.demo.gpietro.serde.PatientAvroSerde
+server.port: 9999
+spring.application.name: patient-streams
+spring.cloud.stream.bindings:
+  process-in-0:
+    destination: adt.patient.location
+    group: storeStreamsGroup
+    consumer:
+      useNativeDecoding: true
+  process-in-1:
+    destination: mysql.admindb.patients
+    group: storeStreamsGroup
+    consumer:
+      useNativeDecoding: true
+  process-out-0:
+    destination: board.patient.location
+    producer:
+      useNativeEncoding: true
+
+spring.cloud.stream.kafka.streams:
+  binder:
+    brokers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+    configuration:
+      commit.interval.ms: 1000
+      schema.registry.url: http://${SCHEMA_REGISTRY_HOST:localhost}:${SCHEMA_REGISTRY_PORT:8081}
+  bindings:
+    process-in-0:
+      consumer:
+        keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+        valueSerde: ch.demo.gpietro.serde.EventPatientLocationAvroSerde
+    process-in-1:
+      consumer:
+        keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+        valueSerde: ch.demo.gpietro.serde.PatientAvroSerde
+        materializedAs: ktable.patients
+    process-out-0:
+      producer:
+        keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+        valueSerde: ch.demo.gpietro.serde.BoardLocationAvroSerde

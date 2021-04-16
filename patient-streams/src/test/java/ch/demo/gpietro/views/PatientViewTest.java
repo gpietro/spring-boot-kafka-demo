@@ -1,24 +1,6 @@
 package ch.demo.gpietro.views;
 
-import ch.demo.gpietro.PatientStreamsApplication;
-import ch.demo.gpietro.schema.Patient;
-import io.confluent.kafka.schemaregistry.testutil.MockSchemaRegistry;
-import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
-import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
-import org.apache.kafka.common.serialization.Serde;
-import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.*;
-import org.apache.kafka.streams.state.KeyValueStore;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.Date;
-import java.util.Map;
-import java.util.Properties;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
+/*
 class PatientViewTest {
 
     private static final String SCHEMA_REGISTRY_SCOPE = PatientViewTest.class.getName();
@@ -98,3 +80,4 @@ class PatientViewTest {
         assertThat(view.get(2L)).isEqualTo(p2);
     }
 }
+ */

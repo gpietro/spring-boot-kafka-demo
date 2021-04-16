@@ -1,0 +1,45 @@
+{
+  "type": "record",
+  "namespace": "ch.demo.gpietro.schema",
+  "name": "BoardLocation",
+  "version": "1",
+  "fields": [
+    {
+      "name": "patientId",
+      "type": "long"
+    },
+    {
+      "name": "treatmentId",
+      "type": "long"
+    },
+    {
+      "name": "wardId",
+      "type": "long"
+    },
+    {
+      "name": "roomId",
+      "type": "long"
+    },
+    {
+      "name": "bedId",
+      "type": "long"
+    },
+    {
+      "name": "first_name",
+      "type": "string"
+    },
+    {
+      "name": "last_name",
+      "type": "string"
+    },
+    {
+      "name": "birth_date",
+      "type": ["null", {
+        "type": "long",
+        "connect.version": 1,
+        "connect.name": "org.apache.kafka.connect.data.Timestamp",
+        "logicalType": "timestamp-millis"
+      }]
+    }
+  ]
+}

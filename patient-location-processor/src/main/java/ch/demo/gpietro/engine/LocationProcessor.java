@@ -6,6 +6,7 @@ import ch.demo.gpietro.configs.SchemaRegistryConfig;
 import ch.demo.gpietro.schema.EventPatientCheckedIn;
 import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
+import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.specific.SpecificData;
 import org.apache.kafka.common.serialization.Serde;
@@ -61,7 +62,8 @@ public class LocationProcessor {
             @Override
             public EventPatientLocation transform(final GenericRecord eventLocation) {
                 EventPatientLocation patientLocation = new EventPatientLocation();
-                if ("EventPatientCheckedIn".equals(eventLocation.getSchema().getName())) {
+                Schema schema = eventLocation.getSchema();
+                if (EventPatientCheckedIn.getClassSchema().equals(schema)) {
                     EventPatientCheckedIn patientCheckedIn = (EventPatientCheckedIn) SpecificData.get().deepCopy(EventPatientCheckedIn.SCHEMA$, eventLocation);
                     patientLocation.setType("Patient checked in!");
                     patientLocation.setPatientId(patientCheckedIn.getPatientId());
@@ -69,7 +71,7 @@ public class LocationProcessor {
                     patientLocation.setWardId(patientCheckedIn.getWardId());
                     patientLocation.setRoomId(patientCheckedIn.getRoomId());
                     patientLocation.setBedId(patientCheckedIn.getBedId());
-                } else if ("EventPatientCheckedOut".equals(eventLocation.getSchema().getName())) {
+                } else if (EventPatientCheckedOut.getClassSchema().equals(schema)) {
                     EventPatientCheckedOut patientCheckedOut = (EventPatientCheckedOut) SpecificData.get().deepCopy(EventPatientCheckedOut.SCHEMA$, eventLocation);
                     patientLocation.setType("Patient checked out!");
                     patientLocation.setPatientId(patientCheckedOut.getPatientId());
