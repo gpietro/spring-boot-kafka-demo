@@ -2,5 +2,6 @@
   "ch.demo.gpietro.schema.EventPatientCheckedIn",
   "ch.demo.gpietro.schema.EventPatientCheckedOut",
   "ch.demo.gpietro.schema.EventPatientRoomChanged",
-  "ch.demo.gpietro.schema.EventPatientBedChanged"
+  "ch.demo.gpietro.schema.EventPatientBedChanged",
+  "ch.demo.gpietro.schema.EventPatientPlanned"
 ]

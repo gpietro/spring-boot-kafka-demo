@@ -25,7 +25,7 @@ spring.cloud.stream.kafka.streams:
   bindings:
     process-in-0:
       consumer:
-        keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
         valueSerde: ch.demo.gpietro.serde.EventPatientLocationAvroSerde
     process-in-1:
       consumer:
@@ -34,5 +34,5 @@ spring.cloud.stream.kafka.streams:
         materializedAs: ktable.patients
     process-out-0:
       producer:
-        keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
         valueSerde: ch.demo.gpietro.serde.BoardLocationAvroSerde

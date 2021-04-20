@@ -17,16 +17,16 @@ spring:
       bootstrap-servers: localhost:9092
       group-id: patient-location
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
     producer:
       bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
     streams:
       application-id: LocationService
       properties:
-        default.key.serde: org.apache.kafka.common.serialization.Serdes$LongSerde
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
         default.value-deserializer: io.confluent.kafka.streams.serdes.avro.GenericAvroDeserializer
         default.value-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
 # debug: true

@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class BoardLocation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -5552529664089933445L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BoardLocation\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"treatmentId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"first_name\",\"type\":\"string\"},{\"name\":\"last_name\",\"type\":\"string\"},{\"name\":\"birth_date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
+  private static final long serialVersionUID = 3288298723643709006L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BoardLocation\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"treatmentId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"first_name\",\"type\":\"string\"},{\"name\":\"last_name\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"},{\"name\":\"birth_date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -81,6 +81,7 @@ static {
    private long bedId;
    private java.lang.CharSequence first_name;
    private java.lang.CharSequence last_name;
+   private java.lang.CharSequence status;
    private java.time.Instant birth_date;
 
   /**
@@ -99,9 +100,10 @@ static {
    * @param bedId The new value for bedId
    * @param first_name The new value for first_name
    * @param last_name The new value for last_name
+   * @param status The new value for status
    * @param birth_date The new value for birth_date
    */
-  public BoardLocation(java.lang.Long patientId, java.lang.Long treatmentId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, java.lang.CharSequence first_name, java.lang.CharSequence last_name, java.time.Instant birth_date) {
+  public BoardLocation(java.lang.Long patientId, java.lang.Long treatmentId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, java.lang.CharSequence first_name, java.lang.CharSequence last_name, java.lang.CharSequence status, java.time.Instant birth_date) {
     this.patientId = patientId;
     this.treatmentId = treatmentId;
     this.wardId = wardId;
@@ -109,6 +111,7 @@ static {
     this.bedId = bedId;
     this.first_name = first_name;
     this.last_name = last_name;
+    this.status = status;
     this.birth_date = birth_date;
   }
 
@@ -124,7 +127,8 @@ static {
     case 4: return bedId;
     case 5: return first_name;
     case 6: return last_name;
-    case 7: return birth_date;
+    case 7: return status;
+    case 8: return birth_date;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -140,7 +144,8 @@ static {
     case 4: bedId = (java.lang.Long)value$; break;
     case 5: first_name = (java.lang.CharSequence)value$; break;
     case 6: last_name = (java.lang.CharSequence)value$; break;
-    case 7: birth_date = (java.time.Instant)value$; break;
+    case 7: status = (java.lang.CharSequence)value$; break;
+    case 8: birth_date = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -265,6 +270,23 @@ static {
   }
 
   /**
+   * Gets the value of the 'status' field.
+   * @return The value of the 'status' field.
+   */
+  public java.lang.CharSequence getStatus() {
+    return status;
+  }
+
+
+  /**
+   * Sets the value of the 'status' field.
+   * @param value the value to set.
+   */
+  public void setStatus(java.lang.CharSequence value) {
+    this.status = value;
+  }
+
+  /**
    * Gets the value of the 'birth_date' field.
    * @return The value of the 'birth_date' field.
    */
@@ -329,6 +351,7 @@ static {
     private long bedId;
     private java.lang.CharSequence first_name;
     private java.lang.CharSequence last_name;
+    private java.lang.CharSequence status;
     private java.time.Instant birth_date;
 
     /** Creates a new Builder */
@@ -370,9 +393,13 @@ static {
         this.last_name = data().deepCopy(fields()[6].schema(), other.last_name);
         fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
-      if (isValidValue(fields()[7], other.birth_date)) {
-        this.birth_date = data().deepCopy(fields()[7].schema(), other.birth_date);
+      if (isValidValue(fields()[7], other.status)) {
+        this.status = data().deepCopy(fields()[7].schema(), other.status);
         fieldSetFlags()[7] = other.fieldSetFlags()[7];
+      }
+      if (isValidValue(fields()[8], other.birth_date)) {
+        this.birth_date = data().deepCopy(fields()[8].schema(), other.birth_date);
+        fieldSetFlags()[8] = other.fieldSetFlags()[8];
       }
     }
 
@@ -410,9 +437,13 @@ static {
         this.last_name = data().deepCopy(fields()[6].schema(), other.last_name);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.birth_date)) {
-        this.birth_date = data().deepCopy(fields()[7].schema(), other.birth_date);
+      if (isValidValue(fields()[7], other.status)) {
+        this.status = data().deepCopy(fields()[7].schema(), other.status);
         fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.birth_date)) {
+        this.birth_date = data().deepCopy(fields()[8].schema(), other.birth_date);
+        fieldSetFlags()[8] = true;
       }
     }
 
@@ -692,6 +723,46 @@ static {
     }
 
     /**
+      * Gets the value of the 'status' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getStatus() {
+      return status;
+    }
+
+
+    /**
+      * Sets the value of the 'status' field.
+      * @param value The value of 'status'.
+      * @return This builder.
+      */
+    public ch.demo.gpietro.schema.BoardLocation.Builder setStatus(java.lang.CharSequence value) {
+      validate(fields()[7], value);
+      this.status = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'status' field has been set.
+      * @return True if the 'status' field has been set, false otherwise.
+      */
+    public boolean hasStatus() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'status' field.
+      * @return This builder.
+      */
+    public ch.demo.gpietro.schema.BoardLocation.Builder clearStatus() {
+      status = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'birth_date' field.
       * @return The value.
       */
@@ -706,9 +777,9 @@ static {
       * @return This builder.
       */
     public ch.demo.gpietro.schema.BoardLocation.Builder setBirthDate(java.time.Instant value) {
-      validate(fields()[7], value);
+      validate(fields()[8], value);
       this.birth_date = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[8] = true;
       return this;
     }
 
@@ -717,7 +788,7 @@ static {
       * @return True if the 'birth_date' field has been set, false otherwise.
       */
     public boolean hasBirthDate() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[8];
     }
 
 
@@ -727,7 +798,7 @@ static {
       */
     public ch.demo.gpietro.schema.BoardLocation.Builder clearBirthDate() {
       birth_date = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -743,7 +814,8 @@ static {
         record.bedId = fieldSetFlags()[4] ? this.bedId : (java.lang.Long) defaultValue(fields()[4]);
         record.first_name = fieldSetFlags()[5] ? this.first_name : (java.lang.CharSequence) defaultValue(fields()[5]);
         record.last_name = fieldSetFlags()[6] ? this.last_name : (java.lang.CharSequence) defaultValue(fields()[6]);
-        record.birth_date = fieldSetFlags()[7] ? this.birth_date : (java.time.Instant) defaultValue(fields()[7]);
+        record.status = fieldSetFlags()[7] ? this.status : (java.lang.CharSequence) defaultValue(fields()[7]);
+        record.birth_date = fieldSetFlags()[8] ? this.birth_date : (java.time.Instant) defaultValue(fields()[8]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;

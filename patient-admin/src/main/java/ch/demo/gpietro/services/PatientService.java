@@ -31,7 +31,7 @@ public class PatientService {
     }
 
     public Patient save(final Patient patient) {
-        Assert.notNull(patient, "patient must not be null");
+        Assert.notNull(patient, "Patient must not be null");
         return patientRepository.save(patient);
     }
 

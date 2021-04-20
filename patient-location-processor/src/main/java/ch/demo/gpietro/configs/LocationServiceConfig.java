@@ -2,8 +2,6 @@ package ch.demo.gpietro.configs;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.streams.StreamsConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -35,7 +33,7 @@ public class LocationServiceConfig {
 
     @Bean
     public NewTopic topicPatientLocation() {
-        return TopicBuilder.name("adt.patient.location").partitions(1).replicas(1).build();
+        return TopicBuilder.name("adt.patient.location").partitions(1).compact().replicas(1).build();
     }
 
     @Bean

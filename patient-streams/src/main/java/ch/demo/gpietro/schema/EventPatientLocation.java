@@ -14,11 +14,14 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class EventPatientLocation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4168880930401129246L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientLocation\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"treatmentId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"}],\"version\":\"1\"}");
+  private static final long serialVersionUID = 8061636555619552911L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientLocation\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EncounterStatus\",\"symbols\":[\"PAST\",\"ACTIVE\",\"PLANNED\"]},\"doc\":\"Encounter status\"},{\"name\":\"date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
+static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
+  }
 
   private static final BinaryMessageEncoder<EventPatientLocation> ENCODER =
       new BinaryMessageEncoder<EventPatientLocation>(MODEL$, SCHEMA$);
@@ -71,12 +74,14 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
     return DECODER.decode(b);
   }
 
-   private java.lang.CharSequence type;
    private long patientId;
-   private long treatmentId;
+   private long episodeOfCareId;
    private long wardId;
    private long roomId;
    private long bedId;
+  /** Encounter status */
+   private ch.demo.gpietro.schema.EncounterStatus status;
+   private java.time.Instant date;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -87,20 +92,22 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
 
   /**
    * All-args constructor.
-   * @param type The new value for type
    * @param patientId The new value for patientId
-   * @param treatmentId The new value for treatmentId
+   * @param episodeOfCareId The new value for episodeOfCareId
    * @param wardId The new value for wardId
    * @param roomId The new value for roomId
    * @param bedId The new value for bedId
+   * @param status Encounter status
+   * @param date The new value for date
    */
-  public EventPatientLocation(java.lang.CharSequence type, java.lang.Long patientId, java.lang.Long treatmentId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId) {
-    this.type = type;
+  public EventPatientLocation(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, ch.demo.gpietro.schema.EncounterStatus status, java.time.Instant date) {
     this.patientId = patientId;
-    this.treatmentId = treatmentId;
+    this.episodeOfCareId = episodeOfCareId;
     this.wardId = wardId;
     this.roomId = roomId;
     this.bedId = bedId;
+    this.status = status;
+    this.date = date;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -108,12 +115,13 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return type;
-    case 1: return patientId;
-    case 2: return treatmentId;
-    case 3: return wardId;
-    case 4: return roomId;
-    case 5: return bedId;
+    case 0: return patientId;
+    case 1: return episodeOfCareId;
+    case 2: return wardId;
+    case 3: return roomId;
+    case 4: return bedId;
+    case 5: return status;
+    case 6: return date;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -122,31 +130,15 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: type = (java.lang.CharSequence)value$; break;
-    case 1: patientId = (java.lang.Long)value$; break;
-    case 2: treatmentId = (java.lang.Long)value$; break;
-    case 3: wardId = (java.lang.Long)value$; break;
-    case 4: roomId = (java.lang.Long)value$; break;
-    case 5: bedId = (java.lang.Long)value$; break;
+    case 0: patientId = (java.lang.Long)value$; break;
+    case 1: episodeOfCareId = (java.lang.Long)value$; break;
+    case 2: wardId = (java.lang.Long)value$; break;
+    case 3: roomId = (java.lang.Long)value$; break;
+    case 4: bedId = (java.lang.Long)value$; break;
+    case 5: status = (ch.demo.gpietro.schema.EncounterStatus)value$; break;
+    case 6: date = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
-  }
-
-  /**
-   * Gets the value of the 'type' field.
-   * @return The value of the 'type' field.
-   */
-  public java.lang.CharSequence getType() {
-    return type;
-  }
-
-
-  /**
-   * Sets the value of the 'type' field.
-   * @param value the value to set.
-   */
-  public void setType(java.lang.CharSequence value) {
-    this.type = value;
   }
 
   /**
@@ -167,20 +159,20 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
   }
 
   /**
-   * Gets the value of the 'treatmentId' field.
-   * @return The value of the 'treatmentId' field.
+   * Gets the value of the 'episodeOfCareId' field.
+   * @return The value of the 'episodeOfCareId' field.
    */
-  public long getTreatmentId() {
-    return treatmentId;
+  public long getEpisodeOfCareId() {
+    return episodeOfCareId;
   }
 
 
   /**
-   * Sets the value of the 'treatmentId' field.
+   * Sets the value of the 'episodeOfCareId' field.
    * @param value the value to set.
    */
-  public void setTreatmentId(long value) {
-    this.treatmentId = value;
+  public void setEpisodeOfCareId(long value) {
+    this.episodeOfCareId = value;
   }
 
   /**
@@ -235,6 +227,41 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
   }
 
   /**
+   * Gets the value of the 'status' field.
+   * @return Encounter status
+   */
+  public ch.demo.gpietro.schema.EncounterStatus getStatus() {
+    return status;
+  }
+
+
+  /**
+   * Sets the value of the 'status' field.
+   * Encounter status
+   * @param value the value to set.
+   */
+  public void setStatus(ch.demo.gpietro.schema.EncounterStatus value) {
+    this.status = value;
+  }
+
+  /**
+   * Gets the value of the 'date' field.
+   * @return The value of the 'date' field.
+   */
+  public java.time.Instant getDate() {
+    return date;
+  }
+
+
+  /**
+   * Sets the value of the 'date' field.
+   * @param value the value to set.
+   */
+  public void setDate(java.time.Instant value) {
+    this.date = value;
+  }
+
+  /**
    * Creates a new EventPatientLocation RecordBuilder.
    * @return A new EventPatientLocation RecordBuilder
    */
@@ -275,12 +302,14 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventPatientLocation>
     implements org.apache.avro.data.RecordBuilder<EventPatientLocation> {
 
-    private java.lang.CharSequence type;
     private long patientId;
-    private long treatmentId;
+    private long episodeOfCareId;
     private long wardId;
     private long roomId;
     private long bedId;
+    /** Encounter status */
+    private ch.demo.gpietro.schema.EncounterStatus status;
+    private java.time.Instant date;
 
     /** Creates a new Builder */
     private Builder() {
@@ -293,29 +322,33 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
      */
     private Builder(ch.demo.gpietro.schema.EventPatientLocation.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.type)) {
-        this.type = data().deepCopy(fields()[0].schema(), other.type);
+      if (isValidValue(fields()[0], other.patientId)) {
+        this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.patientId)) {
-        this.patientId = data().deepCopy(fields()[1].schema(), other.patientId);
+      if (isValidValue(fields()[1], other.episodeOfCareId)) {
+        this.episodeOfCareId = data().deepCopy(fields()[1].schema(), other.episodeOfCareId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.treatmentId)) {
-        this.treatmentId = data().deepCopy(fields()[2].schema(), other.treatmentId);
+      if (isValidValue(fields()[2], other.wardId)) {
+        this.wardId = data().deepCopy(fields()[2].schema(), other.wardId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.wardId)) {
-        this.wardId = data().deepCopy(fields()[3].schema(), other.wardId);
+      if (isValidValue(fields()[3], other.roomId)) {
+        this.roomId = data().deepCopy(fields()[3].schema(), other.roomId);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.roomId)) {
-        this.roomId = data().deepCopy(fields()[4].schema(), other.roomId);
+      if (isValidValue(fields()[4], other.bedId)) {
+        this.bedId = data().deepCopy(fields()[4].schema(), other.bedId);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.bedId)) {
-        this.bedId = data().deepCopy(fields()[5].schema(), other.bedId);
+      if (isValidValue(fields()[5], other.status)) {
+        this.status = data().deepCopy(fields()[5].schema(), other.status);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
+      if (isValidValue(fields()[6], other.date)) {
+        this.date = data().deepCopy(fields()[6].schema(), other.date);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
     }
 
@@ -325,70 +358,34 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
      */
     private Builder(ch.demo.gpietro.schema.EventPatientLocation other) {
       super(SCHEMA$);
-      if (isValidValue(fields()[0], other.type)) {
-        this.type = data().deepCopy(fields()[0].schema(), other.type);
+      if (isValidValue(fields()[0], other.patientId)) {
+        this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.patientId)) {
-        this.patientId = data().deepCopy(fields()[1].schema(), other.patientId);
+      if (isValidValue(fields()[1], other.episodeOfCareId)) {
+        this.episodeOfCareId = data().deepCopy(fields()[1].schema(), other.episodeOfCareId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.treatmentId)) {
-        this.treatmentId = data().deepCopy(fields()[2].schema(), other.treatmentId);
+      if (isValidValue(fields()[2], other.wardId)) {
+        this.wardId = data().deepCopy(fields()[2].schema(), other.wardId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.wardId)) {
-        this.wardId = data().deepCopy(fields()[3].schema(), other.wardId);
+      if (isValidValue(fields()[3], other.roomId)) {
+        this.roomId = data().deepCopy(fields()[3].schema(), other.roomId);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.roomId)) {
-        this.roomId = data().deepCopy(fields()[4].schema(), other.roomId);
+      if (isValidValue(fields()[4], other.bedId)) {
+        this.bedId = data().deepCopy(fields()[4].schema(), other.bedId);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.bedId)) {
-        this.bedId = data().deepCopy(fields()[5].schema(), other.bedId);
+      if (isValidValue(fields()[5], other.status)) {
+        this.status = data().deepCopy(fields()[5].schema(), other.status);
         fieldSetFlags()[5] = true;
       }
-    }
-
-    /**
-      * Gets the value of the 'type' field.
-      * @return The value.
-      */
-    public java.lang.CharSequence getType() {
-      return type;
-    }
-
-
-    /**
-      * Sets the value of the 'type' field.
-      * @param value The value of 'type'.
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setType(java.lang.CharSequence value) {
-      validate(fields()[0], value);
-      this.type = value;
-      fieldSetFlags()[0] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'type' field has been set.
-      * @return True if the 'type' field has been set, false otherwise.
-      */
-    public boolean hasType() {
-      return fieldSetFlags()[0];
-    }
-
-
-    /**
-      * Clears the value of the 'type' field.
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearType() {
-      type = null;
-      fieldSetFlags()[0] = false;
-      return this;
+      if (isValidValue(fields()[6], other.date)) {
+        this.date = data().deepCopy(fields()[6].schema(), other.date);
+        fieldSetFlags()[6] = true;
+      }
     }
 
     /**
@@ -406,9 +403,9 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder setPatientId(long value) {
-      validate(fields()[1], value);
+      validate(fields()[0], value);
       this.patientId = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[0] = true;
       return this;
     }
 
@@ -417,7 +414,7 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return True if the 'patientId' field has been set, false otherwise.
       */
     public boolean hasPatientId() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[0];
     }
 
 
@@ -426,46 +423,46 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder clearPatientId() {
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[0] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'treatmentId' field.
+      * Gets the value of the 'episodeOfCareId' field.
       * @return The value.
       */
-    public long getTreatmentId() {
-      return treatmentId;
+    public long getEpisodeOfCareId() {
+      return episodeOfCareId;
     }
 
 
     /**
-      * Sets the value of the 'treatmentId' field.
-      * @param value The value of 'treatmentId'.
+      * Sets the value of the 'episodeOfCareId' field.
+      * @param value The value of 'episodeOfCareId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setTreatmentId(long value) {
-      validate(fields()[2], value);
-      this.treatmentId = value;
-      fieldSetFlags()[2] = true;
+    public ch.demo.gpietro.schema.EventPatientLocation.Builder setEpisodeOfCareId(long value) {
+      validate(fields()[1], value);
+      this.episodeOfCareId = value;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'treatmentId' field has been set.
-      * @return True if the 'treatmentId' field has been set, false otherwise.
+      * Checks whether the 'episodeOfCareId' field has been set.
+      * @return True if the 'episodeOfCareId' field has been set, false otherwise.
       */
-    public boolean hasTreatmentId() {
-      return fieldSetFlags()[2];
+    public boolean hasEpisodeOfCareId() {
+      return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'treatmentId' field.
+      * Clears the value of the 'episodeOfCareId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearTreatmentId() {
-      fieldSetFlags()[2] = false;
+    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearEpisodeOfCareId() {
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -484,9 +481,9 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder setWardId(long value) {
-      validate(fields()[3], value);
+      validate(fields()[2], value);
       this.wardId = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -495,7 +492,7 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return True if the 'wardId' field has been set, false otherwise.
       */
     public boolean hasWardId() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
 
 
@@ -504,7 +501,7 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder clearWardId() {
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -523,9 +520,9 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder setRoomId(long value) {
-      validate(fields()[4], value);
+      validate(fields()[3], value);
       this.roomId = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -534,7 +531,7 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return True if the 'roomId' field has been set, false otherwise.
       */
     public boolean hasRoomId() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[3];
     }
 
 
@@ -543,7 +540,7 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder clearRoomId() {
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -562,9 +559,9 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder setBedId(long value) {
-      validate(fields()[5], value);
+      validate(fields()[4], value);
       this.bedId = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -573,7 +570,7 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return True if the 'bedId' field has been set, false otherwise.
       */
     public boolean hasBedId() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[4];
     }
 
 
@@ -582,7 +579,91 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public ch.demo.gpietro.schema.EventPatientLocation.Builder clearBedId() {
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'status' field.
+      * Encounter status
+      * @return The value.
+      */
+    public ch.demo.gpietro.schema.EncounterStatus getStatus() {
+      return status;
+    }
+
+
+    /**
+      * Sets the value of the 'status' field.
+      * Encounter status
+      * @param value The value of 'status'.
+      * @return This builder.
+      */
+    public ch.demo.gpietro.schema.EventPatientLocation.Builder setStatus(ch.demo.gpietro.schema.EncounterStatus value) {
+      validate(fields()[5], value);
+      this.status = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'status' field has been set.
+      * Encounter status
+      * @return True if the 'status' field has been set, false otherwise.
+      */
+    public boolean hasStatus() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'status' field.
+      * Encounter status
+      * @return This builder.
+      */
+    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearStatus() {
+      status = null;
       fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'date' field.
+      * @return The value.
+      */
+    public java.time.Instant getDate() {
+      return date;
+    }
+
+
+    /**
+      * Sets the value of the 'date' field.
+      * @param value The value of 'date'.
+      * @return This builder.
+      */
+    public ch.demo.gpietro.schema.EventPatientLocation.Builder setDate(java.time.Instant value) {
+      validate(fields()[6], value);
+      this.date = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'date' field has been set.
+      * @return True if the 'date' field has been set, false otherwise.
+      */
+    public boolean hasDate() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'date' field.
+      * @return This builder.
+      */
+    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearDate() {
+      date = null;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -591,12 +672,13 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
     public EventPatientLocation build() {
       try {
         EventPatientLocation record = new EventPatientLocation();
-        record.type = fieldSetFlags()[0] ? this.type : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.patientId = fieldSetFlags()[1] ? this.patientId : (java.lang.Long) defaultValue(fields()[1]);
-        record.treatmentId = fieldSetFlags()[2] ? this.treatmentId : (java.lang.Long) defaultValue(fields()[2]);
-        record.wardId = fieldSetFlags()[3] ? this.wardId : (java.lang.Long) defaultValue(fields()[3]);
-        record.roomId = fieldSetFlags()[4] ? this.roomId : (java.lang.Long) defaultValue(fields()[4]);
-        record.bedId = fieldSetFlags()[5] ? this.bedId : (java.lang.Long) defaultValue(fields()[5]);
+        record.patientId = fieldSetFlags()[0] ? this.patientId : (java.lang.Long) defaultValue(fields()[0]);
+        record.episodeOfCareId = fieldSetFlags()[1] ? this.episodeOfCareId : (java.lang.Long) defaultValue(fields()[1]);
+        record.wardId = fieldSetFlags()[2] ? this.wardId : (java.lang.Long) defaultValue(fields()[2]);
+        record.roomId = fieldSetFlags()[3] ? this.roomId : (java.lang.Long) defaultValue(fields()[3]);
+        record.bedId = fieldSetFlags()[4] ? this.bedId : (java.lang.Long) defaultValue(fields()[4]);
+        record.status = fieldSetFlags()[5] ? this.status : (ch.demo.gpietro.schema.EncounterStatus) defaultValue(fields()[5]);
+        record.date = fieldSetFlags()[6] ? this.date : (java.time.Instant) defaultValue(fields()[6]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -624,75 +706,6 @@ public class EventPatientLocation extends org.apache.avro.specific.SpecificRecor
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.type);
-
-    out.writeLong(this.patientId);
-
-    out.writeLong(this.treatmentId);
-
-    out.writeLong(this.wardId);
-
-    out.writeLong(this.roomId);
-
-    out.writeLong(this.bedId);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.type = in.readString(this.type instanceof Utf8 ? (Utf8)this.type : null);
-
-      this.patientId = in.readLong();
-
-      this.treatmentId = in.readLong();
-
-      this.wardId = in.readLong();
-
-      this.roomId = in.readLong();
-
-      this.bedId = in.readLong();
-
-    } else {
-      for (int i = 0; i < 6; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.type = in.readString(this.type instanceof Utf8 ? (Utf8)this.type : null);
-          break;
-
-        case 1:
-          this.patientId = in.readLong();
-          break;
-
-        case 2:
-          this.treatmentId = in.readLong();
-          break;
-
-        case 3:
-          this.wardId = in.readLong();
-          break;
-
-        case 4:
-          this.roomId = in.readLong();
-          break;
-
-        case 5:
-          this.bedId = in.readLong();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 

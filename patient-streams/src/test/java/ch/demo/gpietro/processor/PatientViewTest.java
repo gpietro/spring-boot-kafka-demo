@@ -1,4 +1,4 @@
-package ch.demo.gpietro.views;
+package ch.demo.gpietro.processor;
 
 /*
 class PatientViewTest {
