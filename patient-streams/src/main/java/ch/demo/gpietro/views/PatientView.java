@@ -17,14 +17,14 @@ public class PatientView {
 
     @Bean
     public Function<KStream<Long, EventPatientLocation>,
-            Function<GlobalKTable<String, Patient>,
+            Function<GlobalKTable<Long, Patient>,
                     KStream<Long, BoardLocation>>> process() {
         return locationKStream -> (
                 patientGlobalKTable -> (
                         locationKStream.peek(this::logKeyValue)
                                 .join(
                                         patientGlobalKTable,
-                                        (s, location) -> String.valueOf(location.getPatientId()),
+                                        (s, location) -> location.getPatientId(),
                                         this::toBoardLocation
                                 )
                                 .peek(this::logKeyValue)
