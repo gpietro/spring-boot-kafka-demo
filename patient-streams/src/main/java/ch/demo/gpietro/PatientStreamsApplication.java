@@ -20,6 +20,6 @@ public class PatientStreamsApplication {
 
     @Bean
     public NewTopic topicOutputBoardPatients() {
-        return TopicBuilder.name("board.patient.location").partitions(1).replicas(1).build();
+        return TopicBuilder.name("board").partitions(1).replicas(1).build();
     }
 }
