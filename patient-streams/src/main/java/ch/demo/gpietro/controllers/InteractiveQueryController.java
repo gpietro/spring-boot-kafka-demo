@@ -3,8 +3,9 @@ package ch.demo.gpietro.controllers;
 import ch.demo.gpietro.schema.BoardLocation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.kafka.config.StreamsBuilderFactoryBean;
+import org.springframework.http.MediaType;
 import org.springframework.kafka.core.reactive.ReactiveKafkaConsumerTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,18 +18,17 @@ import reactor.core.publisher.Flux;
 public class InteractiveQueryController {
 
     // Necessary to be able to access the ktable
-    private final StreamsBuilderFactoryBean streamsBuilderFactoryBean;
     private final ReactiveKafkaConsumerTemplate<String, BoardLocation> reactiveKafkaConsumerTemplate;
 
-    public InteractiveQueryController(StreamsBuilderFactoryBean streamsBuilderFactoryBean, ReactiveKafkaConsumerTemplate<String, BoardLocation> reactiveKafkaConsumerTemplate) {
-        this.streamsBuilderFactoryBean = streamsBuilderFactoryBean;
+    public InteractiveQueryController(ReactiveKafkaConsumerTemplate<String, BoardLocation> reactiveKafkaConsumerTemplate) {
         this.reactiveKafkaConsumerTemplate = reactiveKafkaConsumerTemplate;
     }
 
-    @GetMapping("/locations")
+    @GetMapping(value = "/locations", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @CrossOrigin(origins = "http://localhost:3000")
     public Flux<BoardLocation> getBoardLocations() {
         return reactiveKafkaConsumerTemplate
-                .receiveAutoAck()
+                .receiveAtMostOnce()
                 .map(ConsumerRecord::value)
                 .doOnNext(boardLocation -> log.info("successfully consumed {}={}", BoardLocation.class.getSimpleName(), boardLocation))
                 .doOnError(throwable -> log.error("something bad happened while consuming : {}", throwable.getMessage()));
