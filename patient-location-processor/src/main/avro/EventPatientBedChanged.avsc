@@ -9,7 +9,15 @@
       "type": "long"
     },
     {
-      "name": "treatmentId",
+      "name": "episodeOfCareId",
+      "type": "long"
+    },
+    {
+      "name": "wardId",
+      "type": "long"
+    },
+    {
+      "name": "roomId",
       "type": "long"
     },
     {

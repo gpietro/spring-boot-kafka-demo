@@ -5,15 +5,11 @@
   "version": "1",
   "fields": [
     {
-      "name": "type",
-      "type": "string"
-    },
-    {
       "name": "patientId",
       "type": "long"
     },
     {
-      "name": "treatmentId",
+      "name": "episodeOfCareId",
       "type": "long"
     },
     {
@@ -27,6 +23,31 @@
     {
       "name": "bedId",
       "type": "long"
+    },
+    {
+      "name": "status",
+      "type": {
+        "name": "EncounterStatus",
+        "type": "enum",
+        "symbols": [
+          "PAST",
+          "ACTIVE",
+          "PLANNED"
+        ]
+      },
+      "doc": "Encounter status"
+    },
+    {
+      "name": "date",
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "connect.version": 1,
+          "connect.name": "org.apache.kafka.connect.data.Timestamp",
+          "logicalType": "timestamp-millis"
+        }
+      ]
     }
   ]
 }
