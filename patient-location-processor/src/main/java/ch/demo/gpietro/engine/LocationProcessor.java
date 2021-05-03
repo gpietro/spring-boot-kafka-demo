@@ -1,9 +1,7 @@
 package ch.demo.gpietro.engine;
 
-import ch.demo.gpietro.schema.EventPatientCheckedOut;
-import ch.demo.gpietro.schema.EventPatientLocation;
 import ch.demo.gpietro.configs.SchemaRegistryConfig;
-import ch.demo.gpietro.schema.EventPatientCheckedIn;
+import ch.demo.gpietro.schema.*;
 import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import org.apache.avro.Schema;
@@ -50,9 +48,9 @@ public class LocationProcessor {
     @Autowired
     public void process(final StreamsBuilder builder) {
         logger.info("Processing location events");
-        KStream<Long, GenericRecord> inputStream = builder.stream("adt.events.location", Consumed.with(Serdes.Long(), eventsValueSerde()));
+        KStream<String, GenericRecord> inputStream = builder.stream("adt.events.location", Consumed.with(Serdes.String(), eventsValueSerde()));
 
-        final KStream<Long, EventPatientLocation> outputStream = inputStream.transformValues(() -> new ValueTransformer<GenericRecord, EventPatientLocation>() {
+        final KStream<String, EventPatientLocation> outputStream = inputStream.transformValues(() -> new ValueTransformer<GenericRecord, EventPatientLocation>() {
 
             @Override
             public void init(ProcessorContext processorContext) {
@@ -63,19 +61,45 @@ public class LocationProcessor {
             public EventPatientLocation transform(final GenericRecord eventLocation) {
                 EventPatientLocation patientLocation = new EventPatientLocation();
                 Schema schema = eventLocation.getSchema();
+                /*if (EventPatientPlanned.getClassSchema().equals(schema)) {
+                    EventPatientPlanned patientPlanned = (EventPatientPlanned) SpecificData.get().deepCopy(EventPatientPlanned.SCHEMA$, eventLocation);
+                    patientLocation.setPatientId(patientPlanned.getPatientId());
+                    patientLocation.setWardId(patientPlanned.getWardId());
+                    patientLocation.setEpisodeOfCareId(patientPlanned.getEpisodeOfCareId());
+                    patientLocation.setDate(patientPlanned.getDate());
+                    patientLocation.setStatus(EncounterStatus.PLANNED);
+                } else
+
+                 */
                 if (EventPatientCheckedIn.getClassSchema().equals(schema)) {
                     EventPatientCheckedIn patientCheckedIn = (EventPatientCheckedIn) SpecificData.get().deepCopy(EventPatientCheckedIn.SCHEMA$, eventLocation);
-                    patientLocation.setType("Patient checked in!");
                     patientLocation.setPatientId(patientCheckedIn.getPatientId());
-                    patientLocation.setTreatmentId(patientCheckedIn.getTreatmentId());
+                    patientLocation.setEpisodeOfCareId(patientCheckedIn.getEpisodeOfCareId());
                     patientLocation.setWardId(patientCheckedIn.getWardId());
                     patientLocation.setRoomId(patientCheckedIn.getRoomId());
                     patientLocation.setBedId(patientCheckedIn.getBedId());
+                    patientLocation.setStatus(EncounterStatus.ACTIVE);
                 } else if (EventPatientCheckedOut.getClassSchema().equals(schema)) {
                     EventPatientCheckedOut patientCheckedOut = (EventPatientCheckedOut) SpecificData.get().deepCopy(EventPatientCheckedOut.SCHEMA$, eventLocation);
-                    patientLocation.setType("Patient checked out!");
                     patientLocation.setPatientId(patientCheckedOut.getPatientId());
-                    patientLocation.setTreatmentId(patientCheckedOut.getTreatmentId());
+                    patientLocation.setEpisodeOfCareId(patientCheckedOut.getEpisodeOfCareId());
+                    patientLocation.setWardId(patientCheckedOut.getWardId());
+                    patientLocation.setStatus(EncounterStatus.PAST);
+                } else if (EventPatientRoomChanged.getClassSchema().equals(schema)) {
+                    EventPatientRoomChanged eventPatientRoomChanged = (EventPatientRoomChanged) SpecificData.get().deepCopy(EventPatientRoomChanged.SCHEMA$, eventLocation);
+                    patientLocation.setPatientId(eventPatientRoomChanged.getPatientId());
+                    patientLocation.setEpisodeOfCareId(eventPatientRoomChanged.getEpisodeOfCareId());
+                    patientLocation.setWardId(eventPatientRoomChanged.getWardId());
+                    patientLocation.setRoomId(eventPatientRoomChanged.getRoomId());
+                    patientLocation.setStatus(EncounterStatus.ACTIVE);
+                } else if (EventPatientBedChanged.getClassSchema().equals(schema)) {
+                    EventPatientBedChanged eventPatientBedChanged = (EventPatientBedChanged) SpecificData.get().deepCopy(EventPatientBedChanged.SCHEMA$, eventLocation);
+                    patientLocation.setPatientId(eventPatientBedChanged.getPatientId());
+                    patientLocation.setEpisodeOfCareId(eventPatientBedChanged.getEpisodeOfCareId());
+                    patientLocation.setWardId(eventPatientBedChanged.getWardId());
+                    patientLocation.setRoomId(eventPatientBedChanged.getRoomId());
+                    patientLocation.setBedId(eventPatientBedChanged.getBedId());
+                    patientLocation.setStatus(EncounterStatus.ACTIVE);
                 }
                 return patientLocation;
             }
@@ -85,22 +109,8 @@ public class LocationProcessor {
 
             }
         });
-        /*
-        final KStream<Long, EventPatientLocation> outputStream = inputStream.groupByKey().reduce(
-                new EventPatientLocation(), (acc, curr) -> {
-                    // TODO: what is the acc type?
-                    System.out.println("Event type: " + curr.getSchema().getName());
 
-                    acc.put("patientId", curr.get("patientId"));
-                    acc.put("treatmentId", curr.get("treatmentId"));
-                    acc.put("wardId", curr.get("wardId"));
-                    acc.put("roomId", curr.get("roomId"));
-                    acc.put("bedId", curr.get("bedId"));
-                    acc.put("patientId", curr.get("patientId"));
-                    return new EventPatientLocation();
-                }).toStream();
-        */
-        outputStream.to("adt.patient.location", Produced.with(Serdes.Long(), locationValueSerde()));
+        outputStream.to("adt.patient.location", Produced.with(Serdes.String(), locationValueSerde()));
     }
 
 }

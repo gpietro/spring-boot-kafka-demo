@@ -12,7 +12,6 @@ public class Consumer {
 
     private Logger logger = LoggerFactory.getLogger(Consumer.class);
 
-    // TODO: what is the meaning of KafkaListener id?
     // Testing the kafka messages
     @KafkaListener(id = "location", topics = "adt.events.location")
     public void listener(ConsumerRecord<String, GenericRecord> record) {

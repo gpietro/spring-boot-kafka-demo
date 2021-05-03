@@ -1,7 +1,7 @@
 {
   "type": "record",
   "namespace": "ch.demo.gpietro.schema",
-  "name": "EventPatientRoomChanged",
+  "name": "EventPatientPlanned",
   "version": "1",
   "fields": [
     {
@@ -17,8 +17,13 @@
       "type": "long"
     },
     {
-      "name": "roomId",
-      "type": "long"
+      "name": "date",
+      "type": {
+        "type": "long",
+        "connect.version": 1,
+        "connect.name": "org.apache.kafka.connect.data.Timestamp",
+        "logicalType": "timestamp-millis"
+      }
     }
   ]
 }

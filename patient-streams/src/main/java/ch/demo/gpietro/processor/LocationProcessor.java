@@ -1,4 +1,4 @@
-package ch.demo.gpietro.views;
+package ch.demo.gpietro.processor;
 
 import ch.demo.gpietro.schema.BoardLocation;
 import ch.demo.gpietro.schema.EventPatientLocation;
@@ -13,12 +13,12 @@ import java.util.function.Function;
 
 @Slf4j
 @Component
-public class PatientView {
+public class LocationProcessor {
 
     @Bean
-    public Function<KStream<Long, EventPatientLocation>,
+    public Function<KStream<String, EventPatientLocation>,
             Function<GlobalKTable<Long, Patient>,
-                    KStream<Long, BoardLocation>>> process() {
+                    KStream<String, BoardLocation>>> process() {
         return locationKStream -> (
                 patientGlobalKTable -> (
                         locationKStream.peek(this::logKeyValue)
@@ -32,20 +32,22 @@ public class PatientView {
         );
     }
 
-    private void logKeyValue(Long key, Object value) {
+    private void logKeyValue(String key, Object value) {
         log.info("==> key: {}, value: {}", key, value);
     }
 
     private BoardLocation toBoardLocation(EventPatientLocation eventPatientLocation, Patient patient) {
+        log.info("==> merging patient: {} {}", patient.getFirstName(), patient.getLastName());
         BoardLocation boardLocation = new BoardLocation();
         boardLocation.setPatientId(eventPatientLocation.getPatientId());
-        boardLocation.setTreatmentId(eventPatientLocation.getTreatmentId());
+        boardLocation.setTreatmentId(eventPatientLocation.getEpisodeOfCareId());
         boardLocation.setWardId(eventPatientLocation.getWardId());
         boardLocation.setRoomId(eventPatientLocation.getRoomId());
         boardLocation.setBedId(eventPatientLocation.getBedId());
         boardLocation.setFirstName(patient.getFirstName());
         boardLocation.setLastName(patient.getLastName());
         boardLocation.setBirthDate(patient.getBirthDate());
+        boardLocation.setStatus(eventPatientLocation.getStatus().toString());
         return boardLocation;
     }
 

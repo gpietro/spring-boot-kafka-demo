@@ -1,7 +1,6 @@
 package ch.demo.gpietro.engine;
 
-import ch.demo.gpietro.schema.EventPatientCheckedIn;
-import ch.demo.gpietro.schema.EventPatientCheckedOut;
+import ch.demo.gpietro.schema.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
@@ -17,31 +16,46 @@ public class Producer {
 
     private static final Logger logger = LoggerFactory.getLogger(Producer.class);
     private static final String TOPIC = "adt.events.location";
-    private final KafkaTemplate<Long, Object> kafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public Producer(KafkaTemplate<Long, Object> kafkaTemplate) {
+    public Producer(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
     @Async
-    public ListenableFuture<SendResult<Long, Object>> produceEventPatientCheckedIn(EventPatientCheckedIn eventPatientCheckedIn) {
+    public ListenableFuture<SendResult<String, Object>> produceEventPatientCheckedIn(EventPatientCheckedIn eventPatientCheckedIn) {
         logger.info("producing {} to {}", eventPatientCheckedIn, TOPIC);
-        return kafkaTemplate.send(TOPIC, eventPatientCheckedIn.getPatientId(), eventPatientCheckedIn);
+        String messageKey = eventPatientCheckedIn.getPatientId() + "-" + eventPatientCheckedIn.getWardId();
+        return kafkaTemplate.send(TOPIC, messageKey, eventPatientCheckedIn);
     }
 
     @Async
-    public ListenableFuture<SendResult<Long, Object>> produceEventPatientCheckedOut(EventPatientCheckedOut eventPatientCheckedOut) {
+    public ListenableFuture<SendResult<String, Object>> produceEventPatientCheckedOut(EventPatientCheckedOut eventPatientCheckedOut) {
         logger.info("producing {} to {}", eventPatientCheckedOut, TOPIC);
-        return kafkaTemplate.send(TOPIC, eventPatientCheckedOut.getPatientId(), eventPatientCheckedOut);
+        String messageKey = eventPatientCheckedOut.getPatientId() + "-" + eventPatientCheckedOut.getWardId();
+        return kafkaTemplate.send(TOPIC, messageKey, eventPatientCheckedOut);
     }
 
-    /*
-    public void sendMessage(String message) {
-        logger.info(String.format("Kafka producer - message: %s", message));
-        // this.kafkaTemplate.send(TOPIC, message);
+    @Async
+    public ListenableFuture<SendResult<String, Object>> produceEventPatientPlanned(EventPatientPlanned eventPatientPlanned) {
+        logger.info("producing {} to {}", eventPatientPlanned, TOPIC);
+        String messageKey = eventPatientPlanned.getPatientId() + "-" + eventPatientPlanned.getWardId();
+        return kafkaTemplate.send(TOPIC, messageKey, eventPatientPlanned);
     }
 
-     */
+    @Async
+    public ListenableFuture<SendResult<String, Object>> produceEventPatientRoomChanged(EventPatientRoomChanged eventPatientRoomChanged) {
+        logger.info("producing {} to {}", eventPatientRoomChanged, TOPIC);
+        String messageKey = eventPatientRoomChanged.getPatientId() + "-" + eventPatientRoomChanged.getWardId();
+        return kafkaTemplate.send(TOPIC, messageKey, eventPatientRoomChanged);
+    }
+
+    @Async
+    public ListenableFuture<SendResult<String, Object>> produceEventPatientBedChanged(EventPatientBedChanged eventPatientBedChanged) {
+        logger.info("producing {} to {}", eventPatientBedChanged, TOPIC);
+        String messageKey = eventPatientBedChanged.getPatientId() + "-" + eventPatientBedChanged.getWardId();
+        return kafkaTemplate.send(TOPIC, messageKey, eventPatientBedChanged);
+    }
 
     @EventListener(ApplicationStartedEvent.class)
     public void produce() {

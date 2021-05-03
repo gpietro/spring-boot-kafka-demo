@@ -13,24 +13,27 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6637087635966208001L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientBedChanged\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"}],\"version\":\"1\"}");
+public class EventPatientPlanned extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 2660420529331254258L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientPlanned\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"date\",\"type\":{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
+static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
+  }
 
-  private static final BinaryMessageEncoder<EventPatientBedChanged> ENCODER =
-      new BinaryMessageEncoder<EventPatientBedChanged>(MODEL$, SCHEMA$);
+  private static final BinaryMessageEncoder<EventPatientPlanned> ENCODER =
+      new BinaryMessageEncoder<EventPatientPlanned>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<EventPatientBedChanged> DECODER =
-      new BinaryMessageDecoder<EventPatientBedChanged>(MODEL$, SCHEMA$);
+  private static final BinaryMessageDecoder<EventPatientPlanned> DECODER =
+      new BinaryMessageDecoder<EventPatientPlanned>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<EventPatientBedChanged> getEncoder() {
+  public static BinaryMessageEncoder<EventPatientPlanned> getEncoder() {
     return ENCODER;
   }
 
@@ -38,7 +41,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<EventPatientBedChanged> getDecoder() {
+  public static BinaryMessageDecoder<EventPatientPlanned> getDecoder() {
     return DECODER;
   }
 
@@ -47,12 +50,12 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<EventPatientBedChanged> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<EventPatientBedChanged>(MODEL$, SCHEMA$, resolver);
+  public static BinaryMessageDecoder<EventPatientPlanned> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<EventPatientPlanned>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this EventPatientBedChanged to a ByteBuffer.
+   * Serializes this EventPatientPlanned to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -61,12 +64,12 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
   }
 
   /**
-   * Deserializes a EventPatientBedChanged from a ByteBuffer.
+   * Deserializes a EventPatientPlanned from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a EventPatientBedChanged instance decoded from the given buffer
+   * @return a EventPatientPlanned instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static EventPatientBedChanged fromByteBuffer(
+  public static EventPatientPlanned fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -74,30 +77,27 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
    private long patientId;
    private long episodeOfCareId;
    private long wardId;
-   private long roomId;
-   private long bedId;
+   private java.time.Instant date;
 
   /**
    * Default constructor.  Note that this does not initialize fields
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public EventPatientBedChanged() {}
+  public EventPatientPlanned() {}
 
   /**
    * All-args constructor.
    * @param patientId The new value for patientId
    * @param episodeOfCareId The new value for episodeOfCareId
    * @param wardId The new value for wardId
-   * @param roomId The new value for roomId
-   * @param bedId The new value for bedId
+   * @param date The new value for date
    */
-  public EventPatientBedChanged(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId) {
+  public EventPatientPlanned(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.time.Instant date) {
     this.patientId = patientId;
     this.episodeOfCareId = episodeOfCareId;
     this.wardId = wardId;
-    this.roomId = roomId;
-    this.bedId = bedId;
+    this.date = date.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -108,10 +108,23 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
     case 0: return patientId;
     case 1: return episodeOfCareId;
     case 2: return wardId;
-    case 3: return roomId;
-    case 4: return bedId;
+    case 3: return date;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  private static final org.apache.avro.Conversion<?>[] conversions =
+      new org.apache.avro.Conversion<?>[] {
+      null,
+      null,
+      null,
+      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+      null
+  };
+
+  @Override
+  public org.apache.avro.Conversion<?> getConversion(int field) {
+    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -121,8 +134,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
     case 0: patientId = (java.lang.Long)value$; break;
     case 1: episodeOfCareId = (java.lang.Long)value$; break;
     case 2: wardId = (java.lang.Long)value$; break;
-    case 3: roomId = (java.lang.Long)value$; break;
-    case 4: bedId = (java.lang.Long)value$; break;
+    case 3: date = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -179,85 +191,67 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
   }
 
   /**
-   * Gets the value of the 'roomId' field.
-   * @return The value of the 'roomId' field.
+   * Gets the value of the 'date' field.
+   * @return The value of the 'date' field.
    */
-  public long getRoomId() {
-    return roomId;
+  public java.time.Instant getDate() {
+    return date;
   }
 
 
   /**
-   * Sets the value of the 'roomId' field.
+   * Sets the value of the 'date' field.
    * @param value the value to set.
    */
-  public void setRoomId(long value) {
-    this.roomId = value;
+  public void setDate(java.time.Instant value) {
+    this.date = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
   }
 
   /**
-   * Gets the value of the 'bedId' field.
-   * @return The value of the 'bedId' field.
+   * Creates a new EventPatientPlanned RecordBuilder.
+   * @return A new EventPatientPlanned RecordBuilder
    */
-  public long getBedId() {
-    return bedId;
-  }
-
-
-  /**
-   * Sets the value of the 'bedId' field.
-   * @param value the value to set.
-   */
-  public void setBedId(long value) {
-    this.bedId = value;
+  public static ch.demo.gpietro.schema.EventPatientPlanned.Builder newBuilder() {
+    return new ch.demo.gpietro.schema.EventPatientPlanned.Builder();
   }
 
   /**
-   * Creates a new EventPatientBedChanged RecordBuilder.
-   * @return A new EventPatientBedChanged RecordBuilder
-   */
-  public static ch.demo.gpietro.schema.EventPatientBedChanged.Builder newBuilder() {
-    return new ch.demo.gpietro.schema.EventPatientBedChanged.Builder();
-  }
-
-  /**
-   * Creates a new EventPatientBedChanged RecordBuilder by copying an existing Builder.
+   * Creates a new EventPatientPlanned RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new EventPatientBedChanged RecordBuilder
+   * @return A new EventPatientPlanned RecordBuilder
    */
-  public static ch.demo.gpietro.schema.EventPatientBedChanged.Builder newBuilder(ch.demo.gpietro.schema.EventPatientBedChanged.Builder other) {
+  public static ch.demo.gpietro.schema.EventPatientPlanned.Builder newBuilder(ch.demo.gpietro.schema.EventPatientPlanned.Builder other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.EventPatientBedChanged.Builder();
+      return new ch.demo.gpietro.schema.EventPatientPlanned.Builder();
     } else {
-      return new ch.demo.gpietro.schema.EventPatientBedChanged.Builder(other);
+      return new ch.demo.gpietro.schema.EventPatientPlanned.Builder(other);
     }
   }
 
   /**
-   * Creates a new EventPatientBedChanged RecordBuilder by copying an existing EventPatientBedChanged instance.
+   * Creates a new EventPatientPlanned RecordBuilder by copying an existing EventPatientPlanned instance.
    * @param other The existing instance to copy.
-   * @return A new EventPatientBedChanged RecordBuilder
+   * @return A new EventPatientPlanned RecordBuilder
    */
-  public static ch.demo.gpietro.schema.EventPatientBedChanged.Builder newBuilder(ch.demo.gpietro.schema.EventPatientBedChanged other) {
+  public static ch.demo.gpietro.schema.EventPatientPlanned.Builder newBuilder(ch.demo.gpietro.schema.EventPatientPlanned other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.EventPatientBedChanged.Builder();
+      return new ch.demo.gpietro.schema.EventPatientPlanned.Builder();
     } else {
-      return new ch.demo.gpietro.schema.EventPatientBedChanged.Builder(other);
+      return new ch.demo.gpietro.schema.EventPatientPlanned.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for EventPatientBedChanged instances.
+   * RecordBuilder for EventPatientPlanned instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventPatientBedChanged>
-    implements org.apache.avro.data.RecordBuilder<EventPatientBedChanged> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventPatientPlanned>
+    implements org.apache.avro.data.RecordBuilder<EventPatientPlanned> {
 
     private long patientId;
     private long episodeOfCareId;
     private long wardId;
-    private long roomId;
-    private long bedId;
+    private java.time.Instant date;
 
     /** Creates a new Builder */
     private Builder() {
@@ -268,7 +262,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ch.demo.gpietro.schema.EventPatientBedChanged.Builder other) {
+    private Builder(ch.demo.gpietro.schema.EventPatientPlanned.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
@@ -282,21 +276,17 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
         this.wardId = data().deepCopy(fields()[2].schema(), other.wardId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.roomId)) {
-        this.roomId = data().deepCopy(fields()[3].schema(), other.roomId);
+      if (isValidValue(fields()[3], other.date)) {
+        this.date = data().deepCopy(fields()[3].schema(), other.date);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
-      }
-      if (isValidValue(fields()[4], other.bedId)) {
-        this.bedId = data().deepCopy(fields()[4].schema(), other.bedId);
-        fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
     }
 
     /**
-     * Creates a Builder by copying an existing EventPatientBedChanged instance
+     * Creates a Builder by copying an existing EventPatientPlanned instance
      * @param other The existing instance to copy.
      */
-    private Builder(ch.demo.gpietro.schema.EventPatientBedChanged other) {
+    private Builder(ch.demo.gpietro.schema.EventPatientPlanned other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
@@ -310,13 +300,9 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
         this.wardId = data().deepCopy(fields()[2].schema(), other.wardId);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.roomId)) {
-        this.roomId = data().deepCopy(fields()[3].schema(), other.roomId);
+      if (isValidValue(fields()[3], other.date)) {
+        this.date = data().deepCopy(fields()[3].schema(), other.date);
         fieldSetFlags()[3] = true;
-      }
-      if (isValidValue(fields()[4], other.bedId)) {
-        this.bedId = data().deepCopy(fields()[4].schema(), other.bedId);
-        fieldSetFlags()[4] = true;
       }
     }
 
@@ -334,7 +320,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
       * @param value The value of 'patientId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder setPatientId(long value) {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder setPatientId(long value) {
       validate(fields()[0], value);
       this.patientId = value;
       fieldSetFlags()[0] = true;
@@ -354,7 +340,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
       * Clears the value of the 'patientId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder clearPatientId() {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder clearPatientId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -373,7 +359,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
       * @param value The value of 'episodeOfCareId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder setEpisodeOfCareId(long value) {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder setEpisodeOfCareId(long value) {
       validate(fields()[1], value);
       this.episodeOfCareId = value;
       fieldSetFlags()[1] = true;
@@ -393,7 +379,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
       * Clears the value of the 'episodeOfCareId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder clearEpisodeOfCareId() {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder clearEpisodeOfCareId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -412,7 +398,7 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
       * @param value The value of 'wardId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder setWardId(long value) {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder setWardId(long value) {
       validate(fields()[2], value);
       this.wardId = value;
       fieldSetFlags()[2] = true;
@@ -432,99 +418,59 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
       * Clears the value of the 'wardId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder clearWardId() {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder clearWardId() {
       fieldSetFlags()[2] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'roomId' field.
+      * Gets the value of the 'date' field.
       * @return The value.
       */
-    public long getRoomId() {
-      return roomId;
+    public java.time.Instant getDate() {
+      return date;
     }
 
 
     /**
-      * Sets the value of the 'roomId' field.
-      * @param value The value of 'roomId'.
+      * Sets the value of the 'date' field.
+      * @param value The value of 'date'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder setRoomId(long value) {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder setDate(java.time.Instant value) {
       validate(fields()[3], value);
-      this.roomId = value;
+      this.date = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'roomId' field has been set.
-      * @return True if the 'roomId' field has been set, false otherwise.
+      * Checks whether the 'date' field has been set.
+      * @return True if the 'date' field has been set, false otherwise.
       */
-    public boolean hasRoomId() {
+    public boolean hasDate() {
       return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'roomId' field.
+      * Clears the value of the 'date' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder clearRoomId() {
+    public ch.demo.gpietro.schema.EventPatientPlanned.Builder clearDate() {
       fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'bedId' field.
-      * @return The value.
-      */
-    public long getBedId() {
-      return bedId;
-    }
-
-
-    /**
-      * Sets the value of the 'bedId' field.
-      * @param value The value of 'bedId'.
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder setBedId(long value) {
-      validate(fields()[4], value);
-      this.bedId = value;
-      fieldSetFlags()[4] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'bedId' field has been set.
-      * @return True if the 'bedId' field has been set, false otherwise.
-      */
-    public boolean hasBedId() {
-      return fieldSetFlags()[4];
-    }
-
-
-    /**
-      * Clears the value of the 'bedId' field.
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientBedChanged.Builder clearBedId() {
-      fieldSetFlags()[4] = false;
       return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public EventPatientBedChanged build() {
+    public EventPatientPlanned build() {
       try {
-        EventPatientBedChanged record = new EventPatientBedChanged();
+        EventPatientPlanned record = new EventPatientPlanned();
         record.patientId = fieldSetFlags()[0] ? this.patientId : (java.lang.Long) defaultValue(fields()[0]);
         record.episodeOfCareId = fieldSetFlags()[1] ? this.episodeOfCareId : (java.lang.Long) defaultValue(fields()[1]);
         record.wardId = fieldSetFlags()[2] ? this.wardId : (java.lang.Long) defaultValue(fields()[2]);
-        record.roomId = fieldSetFlags()[3] ? this.roomId : (java.lang.Long) defaultValue(fields()[3]);
-        record.bedId = fieldSetFlags()[4] ? this.bedId : (java.lang.Long) defaultValue(fields()[4]);
+        record.date = fieldSetFlags()[3] ? this.date : (java.time.Instant) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -535,8 +481,8 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<EventPatientBedChanged>
-    WRITER$ = (org.apache.avro.io.DatumWriter<EventPatientBedChanged>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<EventPatientPlanned>
+    WRITER$ = (org.apache.avro.io.DatumWriter<EventPatientPlanned>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -544,75 +490,14 @@ public class EventPatientBedChanged extends org.apache.avro.specific.SpecificRec
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<EventPatientBedChanged>
-    READER$ = (org.apache.avro.io.DatumReader<EventPatientBedChanged>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<EventPatientPlanned>
+    READER$ = (org.apache.avro.io.DatumReader<EventPatientPlanned>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeLong(this.patientId);
-
-    out.writeLong(this.episodeOfCareId);
-
-    out.writeLong(this.wardId);
-
-    out.writeLong(this.roomId);
-
-    out.writeLong(this.bedId);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.patientId = in.readLong();
-
-      this.episodeOfCareId = in.readLong();
-
-      this.wardId = in.readLong();
-
-      this.roomId = in.readLong();
-
-      this.bedId = in.readLong();
-
-    } else {
-      for (int i = 0; i < 5; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.patientId = in.readLong();
-          break;
-
-        case 1:
-          this.episodeOfCareId = in.readLong();
-          break;
-
-        case 2:
-          this.wardId = in.readLong();
-          break;
-
-        case 3:
-          this.roomId = in.readLong();
-          break;
-
-        case 4:
-          this.bedId = in.readLong();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 
