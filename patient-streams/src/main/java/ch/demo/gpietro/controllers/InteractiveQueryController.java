@@ -17,8 +17,7 @@ import reactor.core.publisher.Flux;
 @RequestMapping("iq/v1/")
 public class InteractiveQueryController {
 
-    // Necessary to be able to access the ktable
-    private final ReactiveKafkaConsumerTemplate<String, BoardLocation> reactiveKafkaConsumerTemplate;
+    final ReactiveKafkaConsumerTemplate<String, BoardLocation> reactiveKafkaConsumerTemplate;
 
     public InteractiveQueryController(ReactiveKafkaConsumerTemplate<String, BoardLocation> reactiveKafkaConsumerTemplate) {
         this.reactiveKafkaConsumerTemplate = reactiveKafkaConsumerTemplate;
@@ -28,9 +27,9 @@ public class InteractiveQueryController {
     @CrossOrigin(origins = "http://localhost:3000")
     public Flux<BoardLocation> getBoardLocations() {
         return reactiveKafkaConsumerTemplate
-                .receiveAtMostOnce()
+                .receive()
                 .map(ConsumerRecord::value)
-                .doOnNext(boardLocation -> log.info("successfully consumed {}={}", BoardLocation.class.getSimpleName(), boardLocation))
+                .doOnNext(boardLocation -> log.info("successfully consumed {}", boardLocation))
                 .doOnError(throwable -> log.error("something bad happened while consuming : {}", throwable.getMessage()));
     }
 

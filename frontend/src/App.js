@@ -9,8 +9,9 @@ const App = () => {
         const eventSource = new EventSource('http://localhost:9999/iq/v1/locations');
         eventSource.onopen = (event) => console.log('open', event);
         eventSource.onmessage = (event) => {
-            const location = JSON.parse(event.data).source;
-            console.log(`location: ${location}`);
+            console.log('event', event.data)
+            //const location = JSON.parse(event.data).source;
+            //console.log(`location: ${location}`);
         };
         eventSource.onerror = (event) => console.log('error', event);
     }, [])

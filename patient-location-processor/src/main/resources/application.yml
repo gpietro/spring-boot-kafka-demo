@@ -1,6 +1,3 @@
-# TODO a cosa servono
-# - group-id, auto-offset-reset
-
 server:
   port: 9000
 spring:

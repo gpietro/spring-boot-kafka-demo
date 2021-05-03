@@ -18,11 +18,14 @@ import java.util.Collections;
 public class KafkaConfig {
 
     private final String bootstrapServersConfig;
+    private final String schemaRegistryUrl;
 
     @Autowired
     public KafkaConfig(
-            @Value("${spring.kafka.consumer.bootstrap-servers:localhost:9092}") final String bootstrapServersConfig) {
+            @Value("${spring.kafka.consumer.bootstrap-servers:localhost:9092}") final String bootstrapServersConfig,
+            @Value("${spring.kafka.consumer.schema.registry.url:localhost:8081}") final String schemaRegistryUrl) {
         this.bootstrapServersConfig = bootstrapServersConfig;
+        this.schemaRegistryUrl = schemaRegistryUrl;
     }
 
     @Bean
@@ -30,10 +33,10 @@ public class KafkaConfig {
         ReceiverOptions<String, BoardLocation> properties = ReceiverOptions.<String, BoardLocation>create()
                 .consumerProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServersConfig)
                 .consumerProperty(ConsumerConfig.GROUP_ID_CONFIG, "board")
+                .consumerProperty("schema.registry.url", schemaRegistryUrl)
                 .subscription(Collections.singleton("board"))
                 .withKeyDeserializer(new StringDeserializer())
-                .withValueDeserializer(new BoardLocationAvroDeserializer())
-                .consumerProperty(ConsumerConfig.GROUP_ID_CONFIG, "board.consumer");
+                .withValueDeserializer(new BoardLocationAvroDeserializer());
 
         return new ReactiveKafkaConsumerTemplate<>(properties);
     }
