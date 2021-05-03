@@ -1,5 +1,7 @@
 # PoC Kafka for ADT Patient
 
+### *Working progress*
+
 This PoC aims to evaluate the usage of Kafka for event sourcing in the development of an Admission Dismission Transfer Patient solution.
 
 ## Run Kafka locally with docker
