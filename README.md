@@ -20,6 +20,7 @@ This PoC aims to evaluate the usage of Kafka for event sourcing in the developme
 
 
 ### Todo
-- Avro Deserialization in ReactiveKafkaConsumerTemplate is not working. NullPointerException is thrown.
 - React front-end application
-- Deserialize timestamp to java Date
+
+### Notes
+- The topic Board has been converted to JSON format to able to use ReactiveKafkaConsumerTemplate that wasn't working with AVRO deserializer.
