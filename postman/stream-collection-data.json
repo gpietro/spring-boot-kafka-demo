@@ -1,0 +1,37 @@
+[
+    {
+        "patientId": 1,
+        "episodeOfCareId": 2,
+        "wardId": 3,
+        "roomId": 11,
+        "bedId": 2
+    },
+    {
+        "patientId": 2,
+        "episodeOfCareId": 3,
+        "wardId": 4,
+        "roomId": 11,
+        "bedId": 2
+    },
+    {
+        "patientId": 3,
+        "episodeOfCareId": 4,
+        "wardId": 5,
+        "roomId": 11,
+        "bedId": 2
+    },
+    {
+        "patientId": 4,
+        "episodeOfCareId": 5,
+        "wardId": 6,
+        "roomId": 11,
+        "bedId": 2
+    },
+    {
+        "patientId": 5,
+        "episodeOfCareId": 6,
+        "wardId": 7,
+        "roomId": 11,
+        "bedId": 2
+    }
+]

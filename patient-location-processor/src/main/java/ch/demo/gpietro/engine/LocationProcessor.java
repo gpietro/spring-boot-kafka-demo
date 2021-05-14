@@ -1,7 +1,7 @@
 package ch.demo.gpietro.engine;
 
 import ch.demo.gpietro.configs.SchemaRegistryConfig;
-import ch.demo.gpietro.schema.*;
+import ch.demo.gpietro.schema.avro.*;
 import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import org.apache.avro.Schema;

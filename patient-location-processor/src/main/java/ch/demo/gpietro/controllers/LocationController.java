@@ -1,7 +1,7 @@
 package ch.demo.gpietro.controllers;
 
 import ch.demo.gpietro.engine.Producer;
-import ch.demo.gpietro.schema.*;
+import ch.demo.gpietro.schema.avro.*;
 import com.fasterxml.jackson.databind.MapperFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

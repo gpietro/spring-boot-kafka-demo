@@ -1,14 +1,15 @@
 package ch.demo.gpietro.processor;
 
-import ch.demo.gpietro.schema.BoardLocation;
-import ch.demo.gpietro.schema.EventPatientLocation;
-import ch.demo.gpietro.schema.Patient;
+import ch.demo.gpietro.schema.avro.EventPatientLocation;
+import ch.demo.gpietro.schema.avro.Patient;
+import ch.demo.gpietro.schema.json.BoardLocation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.kstream.GlobalKTable;
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.function.Function;
 
 @Slf4j
@@ -40,14 +41,14 @@ public class LocationProcessor {
         log.info("==> merging patient: {} {}", patient.getFirstName(), patient.getLastName());
         BoardLocation boardLocation = new BoardLocation();
         boardLocation.setPatientId(eventPatientLocation.getPatientId());
-        boardLocation.setTreatmentId(eventPatientLocation.getEpisodeOfCareId());
+        boardLocation.setEpisodeOfCareId(eventPatientLocation.getEpisodeOfCareId());
         boardLocation.setWardId(eventPatientLocation.getWardId());
         boardLocation.setRoomId(eventPatientLocation.getRoomId());
         boardLocation.setBedId(eventPatientLocation.getBedId());
-        boardLocation.setFirstName(patient.getFirstName());
-        boardLocation.setLastName(patient.getLastName());
-        boardLocation.setBirthDate(patient.getBirthDate());
+        boardLocation.setFirstName(patient.getFirstName().toString());
+        boardLocation.setLastName(patient.getLastName().toString());
         boardLocation.setStatus(eventPatientLocation.getStatus().toString());
+        boardLocation.setBirthDate(Date.from(patient.getBirthDate()));
         return boardLocation;
     }
 

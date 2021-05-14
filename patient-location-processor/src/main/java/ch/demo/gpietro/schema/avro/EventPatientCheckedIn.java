@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package ch.demo.gpietro.schema;
+package ch.demo.gpietro.schema.avro;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -13,27 +13,24 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class EventPatientLocation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8061636555619552911L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientLocation\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EncounterStatus\",\"symbols\":[\"PAST\",\"ACTIVE\",\"PLANNED\"]},\"doc\":\"Encounter status\"},{\"name\":\"date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
+public class EventPatientCheckedIn extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 2397847277132476769L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientCheckedIn\",\"namespace\":\"ch.demo.gpietro.schema.avro\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
-static {
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
-  }
 
-  private static final BinaryMessageEncoder<EventPatientLocation> ENCODER =
-      new BinaryMessageEncoder<EventPatientLocation>(MODEL$, SCHEMA$);
+  private static final BinaryMessageEncoder<EventPatientCheckedIn> ENCODER =
+      new BinaryMessageEncoder<EventPatientCheckedIn>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<EventPatientLocation> DECODER =
-      new BinaryMessageDecoder<EventPatientLocation>(MODEL$, SCHEMA$);
+  private static final BinaryMessageDecoder<EventPatientCheckedIn> DECODER =
+      new BinaryMessageDecoder<EventPatientCheckedIn>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<EventPatientLocation> getEncoder() {
+  public static BinaryMessageEncoder<EventPatientCheckedIn> getEncoder() {
     return ENCODER;
   }
 
@@ -41,7 +38,7 @@ static {
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<EventPatientLocation> getDecoder() {
+  public static BinaryMessageDecoder<EventPatientCheckedIn> getDecoder() {
     return DECODER;
   }
 
@@ -50,12 +47,12 @@ static {
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<EventPatientLocation> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<EventPatientLocation>(MODEL$, SCHEMA$, resolver);
+  public static BinaryMessageDecoder<EventPatientCheckedIn> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<EventPatientCheckedIn>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this EventPatientLocation to a ByteBuffer.
+   * Serializes this EventPatientCheckedIn to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -64,12 +61,12 @@ static {
   }
 
   /**
-   * Deserializes a EventPatientLocation from a ByteBuffer.
+   * Deserializes a EventPatientCheckedIn from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a EventPatientLocation instance decoded from the given buffer
+   * @return a EventPatientCheckedIn instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static EventPatientLocation fromByteBuffer(
+  public static EventPatientCheckedIn fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
@@ -79,16 +76,13 @@ static {
    private long wardId;
    private long roomId;
    private long bedId;
-  /** Encounter status */
-   private ch.demo.gpietro.schema.EncounterStatus status;
-   private java.time.Instant date;
 
   /**
    * Default constructor.  Note that this does not initialize fields
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public EventPatientLocation() {}
+  public EventPatientCheckedIn() {}
 
   /**
    * All-args constructor.
@@ -97,17 +91,13 @@ static {
    * @param wardId The new value for wardId
    * @param roomId The new value for roomId
    * @param bedId The new value for bedId
-   * @param status Encounter status
-   * @param date The new value for date
    */
-  public EventPatientLocation(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, ch.demo.gpietro.schema.EncounterStatus status, java.time.Instant date) {
+  public EventPatientCheckedIn(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId) {
     this.patientId = patientId;
     this.episodeOfCareId = episodeOfCareId;
     this.wardId = wardId;
     this.roomId = roomId;
     this.bedId = bedId;
-    this.status = status;
-    this.date = date;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -120,8 +110,6 @@ static {
     case 2: return wardId;
     case 3: return roomId;
     case 4: return bedId;
-    case 5: return status;
-    case 6: return date;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -135,8 +123,6 @@ static {
     case 2: wardId = (java.lang.Long)value$; break;
     case 3: roomId = (java.lang.Long)value$; break;
     case 4: bedId = (java.lang.Long)value$; break;
-    case 5: status = (ch.demo.gpietro.schema.EncounterStatus)value$; break;
-    case 6: date = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -227,89 +213,51 @@ static {
   }
 
   /**
-   * Gets the value of the 'status' field.
-   * @return Encounter status
+   * Creates a new EventPatientCheckedIn RecordBuilder.
+   * @return A new EventPatientCheckedIn RecordBuilder
    */
-  public ch.demo.gpietro.schema.EncounterStatus getStatus() {
-    return status;
-  }
-
-
-  /**
-   * Sets the value of the 'status' field.
-   * Encounter status
-   * @param value the value to set.
-   */
-  public void setStatus(ch.demo.gpietro.schema.EncounterStatus value) {
-    this.status = value;
+  public static ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder newBuilder() {
+    return new ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder();
   }
 
   /**
-   * Gets the value of the 'date' field.
-   * @return The value of the 'date' field.
-   */
-  public java.time.Instant getDate() {
-    return date;
-  }
-
-
-  /**
-   * Sets the value of the 'date' field.
-   * @param value the value to set.
-   */
-  public void setDate(java.time.Instant value) {
-    this.date = value;
-  }
-
-  /**
-   * Creates a new EventPatientLocation RecordBuilder.
-   * @return A new EventPatientLocation RecordBuilder
-   */
-  public static ch.demo.gpietro.schema.EventPatientLocation.Builder newBuilder() {
-    return new ch.demo.gpietro.schema.EventPatientLocation.Builder();
-  }
-
-  /**
-   * Creates a new EventPatientLocation RecordBuilder by copying an existing Builder.
+   * Creates a new EventPatientCheckedIn RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new EventPatientLocation RecordBuilder
+   * @return A new EventPatientCheckedIn RecordBuilder
    */
-  public static ch.demo.gpietro.schema.EventPatientLocation.Builder newBuilder(ch.demo.gpietro.schema.EventPatientLocation.Builder other) {
+  public static ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder newBuilder(ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder();
+      return new ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder();
     } else {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder(other);
+      return new ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder(other);
     }
   }
 
   /**
-   * Creates a new EventPatientLocation RecordBuilder by copying an existing EventPatientLocation instance.
+   * Creates a new EventPatientCheckedIn RecordBuilder by copying an existing EventPatientCheckedIn instance.
    * @param other The existing instance to copy.
-   * @return A new EventPatientLocation RecordBuilder
+   * @return A new EventPatientCheckedIn RecordBuilder
    */
-  public static ch.demo.gpietro.schema.EventPatientLocation.Builder newBuilder(ch.demo.gpietro.schema.EventPatientLocation other) {
+  public static ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder newBuilder(ch.demo.gpietro.schema.avro.EventPatientCheckedIn other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder();
+      return new ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder();
     } else {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder(other);
+      return new ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for EventPatientLocation instances.
+   * RecordBuilder for EventPatientCheckedIn instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventPatientLocation>
-    implements org.apache.avro.data.RecordBuilder<EventPatientLocation> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventPatientCheckedIn>
+    implements org.apache.avro.data.RecordBuilder<EventPatientCheckedIn> {
 
     private long patientId;
     private long episodeOfCareId;
     private long wardId;
     private long roomId;
     private long bedId;
-    /** Encounter status */
-    private ch.demo.gpietro.schema.EncounterStatus status;
-    private java.time.Instant date;
 
     /** Creates a new Builder */
     private Builder() {
@@ -320,7 +268,7 @@ static {
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ch.demo.gpietro.schema.EventPatientLocation.Builder other) {
+    private Builder(ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
@@ -342,21 +290,13 @@ static {
         this.bedId = data().deepCopy(fields()[4].schema(), other.bedId);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.status)) {
-        this.status = data().deepCopy(fields()[5].schema(), other.status);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
-      }
-      if (isValidValue(fields()[6], other.date)) {
-        this.date = data().deepCopy(fields()[6].schema(), other.date);
-        fieldSetFlags()[6] = other.fieldSetFlags()[6];
-      }
     }
 
     /**
-     * Creates a Builder by copying an existing EventPatientLocation instance
+     * Creates a Builder by copying an existing EventPatientCheckedIn instance
      * @param other The existing instance to copy.
      */
-    private Builder(ch.demo.gpietro.schema.EventPatientLocation other) {
+    private Builder(ch.demo.gpietro.schema.avro.EventPatientCheckedIn other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
@@ -378,14 +318,6 @@ static {
         this.bedId = data().deepCopy(fields()[4].schema(), other.bedId);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.status)) {
-        this.status = data().deepCopy(fields()[5].schema(), other.status);
-        fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.date)) {
-        this.date = data().deepCopy(fields()[6].schema(), other.date);
-        fieldSetFlags()[6] = true;
-      }
     }
 
     /**
@@ -402,7 +334,7 @@ static {
       * @param value The value of 'patientId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setPatientId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder setPatientId(long value) {
       validate(fields()[0], value);
       this.patientId = value;
       fieldSetFlags()[0] = true;
@@ -422,7 +354,7 @@ static {
       * Clears the value of the 'patientId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearPatientId() {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder clearPatientId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -441,7 +373,7 @@ static {
       * @param value The value of 'episodeOfCareId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setEpisodeOfCareId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder setEpisodeOfCareId(long value) {
       validate(fields()[1], value);
       this.episodeOfCareId = value;
       fieldSetFlags()[1] = true;
@@ -461,7 +393,7 @@ static {
       * Clears the value of the 'episodeOfCareId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearEpisodeOfCareId() {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder clearEpisodeOfCareId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -480,7 +412,7 @@ static {
       * @param value The value of 'wardId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setWardId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder setWardId(long value) {
       validate(fields()[2], value);
       this.wardId = value;
       fieldSetFlags()[2] = true;
@@ -500,7 +432,7 @@ static {
       * Clears the value of the 'wardId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearWardId() {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder clearWardId() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -519,7 +451,7 @@ static {
       * @param value The value of 'roomId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setRoomId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder setRoomId(long value) {
       validate(fields()[3], value);
       this.roomId = value;
       fieldSetFlags()[3] = true;
@@ -539,7 +471,7 @@ static {
       * Clears the value of the 'roomId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearRoomId() {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder clearRoomId() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -558,7 +490,7 @@ static {
       * @param value The value of 'bedId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setBedId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder setBedId(long value) {
       validate(fields()[4], value);
       this.bedId = value;
       fieldSetFlags()[4] = true;
@@ -578,107 +510,21 @@ static {
       * Clears the value of the 'bedId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearBedId() {
+    public ch.demo.gpietro.schema.avro.EventPatientCheckedIn.Builder clearBedId() {
       fieldSetFlags()[4] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'status' field.
-      * Encounter status
-      * @return The value.
-      */
-    public ch.demo.gpietro.schema.EncounterStatus getStatus() {
-      return status;
-    }
-
-
-    /**
-      * Sets the value of the 'status' field.
-      * Encounter status
-      * @param value The value of 'status'.
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setStatus(ch.demo.gpietro.schema.EncounterStatus value) {
-      validate(fields()[5], value);
-      this.status = value;
-      fieldSetFlags()[5] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'status' field has been set.
-      * Encounter status
-      * @return True if the 'status' field has been set, false otherwise.
-      */
-    public boolean hasStatus() {
-      return fieldSetFlags()[5];
-    }
-
-
-    /**
-      * Clears the value of the 'status' field.
-      * Encounter status
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearStatus() {
-      status = null;
-      fieldSetFlags()[5] = false;
-      return this;
-    }
-
-    /**
-      * Gets the value of the 'date' field.
-      * @return The value.
-      */
-    public java.time.Instant getDate() {
-      return date;
-    }
-
-
-    /**
-      * Sets the value of the 'date' field.
-      * @param value The value of 'date'.
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setDate(java.time.Instant value) {
-      validate(fields()[6], value);
-      this.date = value;
-      fieldSetFlags()[6] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'date' field has been set.
-      * @return True if the 'date' field has been set, false otherwise.
-      */
-    public boolean hasDate() {
-      return fieldSetFlags()[6];
-    }
-
-
-    /**
-      * Clears the value of the 'date' field.
-      * @return This builder.
-      */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearDate() {
-      date = null;
-      fieldSetFlags()[6] = false;
       return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public EventPatientLocation build() {
+    public EventPatientCheckedIn build() {
       try {
-        EventPatientLocation record = new EventPatientLocation();
+        EventPatientCheckedIn record = new EventPatientCheckedIn();
         record.patientId = fieldSetFlags()[0] ? this.patientId : (java.lang.Long) defaultValue(fields()[0]);
         record.episodeOfCareId = fieldSetFlags()[1] ? this.episodeOfCareId : (java.lang.Long) defaultValue(fields()[1]);
         record.wardId = fieldSetFlags()[2] ? this.wardId : (java.lang.Long) defaultValue(fields()[2]);
         record.roomId = fieldSetFlags()[3] ? this.roomId : (java.lang.Long) defaultValue(fields()[3]);
         record.bedId = fieldSetFlags()[4] ? this.bedId : (java.lang.Long) defaultValue(fields()[4]);
-        record.status = fieldSetFlags()[5] ? this.status : (ch.demo.gpietro.schema.EncounterStatus) defaultValue(fields()[5]);
-        record.date = fieldSetFlags()[6] ? this.date : (java.time.Instant) defaultValue(fields()[6]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -689,8 +535,8 @@ static {
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<EventPatientLocation>
-    WRITER$ = (org.apache.avro.io.DatumWriter<EventPatientLocation>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<EventPatientCheckedIn>
+    WRITER$ = (org.apache.avro.io.DatumWriter<EventPatientCheckedIn>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -698,14 +544,75 @@ static {
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<EventPatientLocation>
-    READER$ = (org.apache.avro.io.DatumReader<EventPatientLocation>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<EventPatientCheckedIn>
+    READER$ = (org.apache.avro.io.DatumReader<EventPatientCheckedIn>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
+  @Override protected boolean hasCustomCoders() { return true; }
+
+  @Override public void customEncode(org.apache.avro.io.Encoder out)
+    throws java.io.IOException
+  {
+    out.writeLong(this.patientId);
+
+    out.writeLong(this.episodeOfCareId);
+
+    out.writeLong(this.wardId);
+
+    out.writeLong(this.roomId);
+
+    out.writeLong(this.bedId);
+
+  }
+
+  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
+    throws java.io.IOException
+  {
+    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
+    if (fieldOrder == null) {
+      this.patientId = in.readLong();
+
+      this.episodeOfCareId = in.readLong();
+
+      this.wardId = in.readLong();
+
+      this.roomId = in.readLong();
+
+      this.bedId = in.readLong();
+
+    } else {
+      for (int i = 0; i < 5; i++) {
+        switch (fieldOrder[i].pos()) {
+        case 0:
+          this.patientId = in.readLong();
+          break;
+
+        case 1:
+          this.episodeOfCareId = in.readLong();
+          break;
+
+        case 2:
+          this.wardId = in.readLong();
+          break;
+
+        case 3:
+          this.roomId = in.readLong();
+          break;
+
+        case 4:
+          this.bedId = in.readLong();
+          break;
+
+        default:
+          throw new java.io.IOException("Corrupt ResolvingDecoder.");
+        }
+      }
+    }
+  }
 }
 
 

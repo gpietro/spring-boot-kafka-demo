@@ -144,23 +144,23 @@
                     <references>
                         <adt.events.location-value>
                             <reference>
-                                <name>ch.demo.gpietro.schema.EventPatientCheckedIn</name>
+                                <name>ch.demo.gpietro.schema.avro.EventPatientCheckedIn</name>
                                 <subject>eventPatientCheckedIn</subject>
                             </reference>
                             <reference>
-                                <name>ch.demo.gpietro.schema.EventPatientCheckedOut</name>
+                                <name>ch.demo.gpietro.schema.avro.EventPatientCheckedOut</name>
                                 <subject>eventPatientCheckedOut</subject>
                             </reference>
                             <reference>
-                                <name>ch.demo.gpietro.schema.EventPatientRoomChanged</name>
+                                <name>ch.demo.gpietro.schema.avro.EventPatientRoomChanged</name>
                                 <subject>eventPatientRoomChanged</subject>
                             </reference>
                             <reference>
-                                <name>ch.demo.gpietro.schema.EventPatientBedChanged</name>
+                                <name>ch.demo.gpietro.schema.avro.EventPatientBedChanged</name>
                                 <subject>eventPatientBedChanged</subject>
                             </reference>
                             <reference>
-                                <name>ch.demo.gpietro.schema.EventPatientPlanned</name>
+                                <name>ch.demo.gpietro.schema.avro.EventPatientPlanned</name>
                                 <subject>eventPatientPlanned</subject>
                             </reference>
                         </adt.events.location-value>

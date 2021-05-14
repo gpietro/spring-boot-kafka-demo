@@ -1,7 +1,7 @@
 [
-  "ch.demo.gpietro.schema.EventPatientCheckedIn",
-  "ch.demo.gpietro.schema.EventPatientCheckedOut",
-  "ch.demo.gpietro.schema.EventPatientRoomChanged",
-  "ch.demo.gpietro.schema.EventPatientBedChanged",
-  "ch.demo.gpietro.schema.EventPatientPlanned"
+  "ch.demo.gpietro.schema.avro.EventPatientCheckedIn",
+  "ch.demo.gpietro.schema.avro.EventPatientCheckedOut",
+  "ch.demo.gpietro.schema.avro.EventPatientRoomChanged",
+  "ch.demo.gpietro.schema.avro.EventPatientBedChanged",
+  "ch.demo.gpietro.schema.avro.EventPatientPlanned"
 ]

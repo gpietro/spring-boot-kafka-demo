@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package ch.demo.gpietro.schema;
+package ch.demo.gpietro.schema.avro;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class EventPatientLocation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 8061636555619552911L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientLocation\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EncounterStatus\",\"symbols\":[\"PAST\",\"ACTIVE\",\"PLANNED\"]},\"doc\":\"Encounter status\"},{\"name\":\"date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
+  private static final long serialVersionUID = 1894161513216199705L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventPatientLocation\",\"namespace\":\"ch.demo.gpietro.schema.avro\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EncounterStatus\",\"symbols\":[\"PAST\",\"ACTIVE\",\"PLANNED\"]},\"doc\":\"Encounter status\"},{\"name\":\"date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -80,7 +80,7 @@ static {
    private long roomId;
    private long bedId;
   /** Encounter status */
-   private ch.demo.gpietro.schema.EncounterStatus status;
+   private ch.demo.gpietro.schema.avro.EncounterStatus status;
    private java.time.Instant date;
 
   /**
@@ -100,7 +100,7 @@ static {
    * @param status Encounter status
    * @param date The new value for date
    */
-  public EventPatientLocation(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, ch.demo.gpietro.schema.EncounterStatus status, java.time.Instant date) {
+  public EventPatientLocation(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, ch.demo.gpietro.schema.avro.EncounterStatus status, java.time.Instant date) {
     this.patientId = patientId;
     this.episodeOfCareId = episodeOfCareId;
     this.wardId = wardId;
@@ -135,7 +135,7 @@ static {
     case 2: wardId = (java.lang.Long)value$; break;
     case 3: roomId = (java.lang.Long)value$; break;
     case 4: bedId = (java.lang.Long)value$; break;
-    case 5: status = (ch.demo.gpietro.schema.EncounterStatus)value$; break;
+    case 5: status = (ch.demo.gpietro.schema.avro.EncounterStatus)value$; break;
     case 6: date = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -230,7 +230,7 @@ static {
    * Gets the value of the 'status' field.
    * @return Encounter status
    */
-  public ch.demo.gpietro.schema.EncounterStatus getStatus() {
+  public ch.demo.gpietro.schema.avro.EncounterStatus getStatus() {
     return status;
   }
 
@@ -240,7 +240,7 @@ static {
    * Encounter status
    * @param value the value to set.
    */
-  public void setStatus(ch.demo.gpietro.schema.EncounterStatus value) {
+  public void setStatus(ch.demo.gpietro.schema.avro.EncounterStatus value) {
     this.status = value;
   }
 
@@ -265,8 +265,8 @@ static {
    * Creates a new EventPatientLocation RecordBuilder.
    * @return A new EventPatientLocation RecordBuilder
    */
-  public static ch.demo.gpietro.schema.EventPatientLocation.Builder newBuilder() {
-    return new ch.demo.gpietro.schema.EventPatientLocation.Builder();
+  public static ch.demo.gpietro.schema.avro.EventPatientLocation.Builder newBuilder() {
+    return new ch.demo.gpietro.schema.avro.EventPatientLocation.Builder();
   }
 
   /**
@@ -274,11 +274,11 @@ static {
    * @param other The existing builder to copy.
    * @return A new EventPatientLocation RecordBuilder
    */
-  public static ch.demo.gpietro.schema.EventPatientLocation.Builder newBuilder(ch.demo.gpietro.schema.EventPatientLocation.Builder other) {
+  public static ch.demo.gpietro.schema.avro.EventPatientLocation.Builder newBuilder(ch.demo.gpietro.schema.avro.EventPatientLocation.Builder other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder();
+      return new ch.demo.gpietro.schema.avro.EventPatientLocation.Builder();
     } else {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder(other);
+      return new ch.demo.gpietro.schema.avro.EventPatientLocation.Builder(other);
     }
   }
 
@@ -287,11 +287,11 @@ static {
    * @param other The existing instance to copy.
    * @return A new EventPatientLocation RecordBuilder
    */
-  public static ch.demo.gpietro.schema.EventPatientLocation.Builder newBuilder(ch.demo.gpietro.schema.EventPatientLocation other) {
+  public static ch.demo.gpietro.schema.avro.EventPatientLocation.Builder newBuilder(ch.demo.gpietro.schema.avro.EventPatientLocation other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder();
+      return new ch.demo.gpietro.schema.avro.EventPatientLocation.Builder();
     } else {
-      return new ch.demo.gpietro.schema.EventPatientLocation.Builder(other);
+      return new ch.demo.gpietro.schema.avro.EventPatientLocation.Builder(other);
     }
   }
 
@@ -308,7 +308,7 @@ static {
     private long roomId;
     private long bedId;
     /** Encounter status */
-    private ch.demo.gpietro.schema.EncounterStatus status;
+    private ch.demo.gpietro.schema.avro.EncounterStatus status;
     private java.time.Instant date;
 
     /** Creates a new Builder */
@@ -320,7 +320,7 @@ static {
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ch.demo.gpietro.schema.EventPatientLocation.Builder other) {
+    private Builder(ch.demo.gpietro.schema.avro.EventPatientLocation.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
@@ -356,7 +356,7 @@ static {
      * Creates a Builder by copying an existing EventPatientLocation instance
      * @param other The existing instance to copy.
      */
-    private Builder(ch.demo.gpietro.schema.EventPatientLocation other) {
+    private Builder(ch.demo.gpietro.schema.avro.EventPatientLocation other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
@@ -402,7 +402,7 @@ static {
       * @param value The value of 'patientId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setPatientId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder setPatientId(long value) {
       validate(fields()[0], value);
       this.patientId = value;
       fieldSetFlags()[0] = true;
@@ -422,7 +422,7 @@ static {
       * Clears the value of the 'patientId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearPatientId() {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder clearPatientId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -441,7 +441,7 @@ static {
       * @param value The value of 'episodeOfCareId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setEpisodeOfCareId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder setEpisodeOfCareId(long value) {
       validate(fields()[1], value);
       this.episodeOfCareId = value;
       fieldSetFlags()[1] = true;
@@ -461,7 +461,7 @@ static {
       * Clears the value of the 'episodeOfCareId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearEpisodeOfCareId() {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder clearEpisodeOfCareId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -480,7 +480,7 @@ static {
       * @param value The value of 'wardId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setWardId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder setWardId(long value) {
       validate(fields()[2], value);
       this.wardId = value;
       fieldSetFlags()[2] = true;
@@ -500,7 +500,7 @@ static {
       * Clears the value of the 'wardId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearWardId() {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder clearWardId() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -519,7 +519,7 @@ static {
       * @param value The value of 'roomId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setRoomId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder setRoomId(long value) {
       validate(fields()[3], value);
       this.roomId = value;
       fieldSetFlags()[3] = true;
@@ -539,7 +539,7 @@ static {
       * Clears the value of the 'roomId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearRoomId() {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder clearRoomId() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -558,7 +558,7 @@ static {
       * @param value The value of 'bedId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setBedId(long value) {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder setBedId(long value) {
       validate(fields()[4], value);
       this.bedId = value;
       fieldSetFlags()[4] = true;
@@ -578,7 +578,7 @@ static {
       * Clears the value of the 'bedId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearBedId() {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder clearBedId() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -588,7 +588,7 @@ static {
       * Encounter status
       * @return The value.
       */
-    public ch.demo.gpietro.schema.EncounterStatus getStatus() {
+    public ch.demo.gpietro.schema.avro.EncounterStatus getStatus() {
       return status;
     }
 
@@ -599,7 +599,7 @@ static {
       * @param value The value of 'status'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setStatus(ch.demo.gpietro.schema.EncounterStatus value) {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder setStatus(ch.demo.gpietro.schema.avro.EncounterStatus value) {
       validate(fields()[5], value);
       this.status = value;
       fieldSetFlags()[5] = true;
@@ -621,7 +621,7 @@ static {
       * Encounter status
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearStatus() {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder clearStatus() {
       status = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -641,7 +641,7 @@ static {
       * @param value The value of 'date'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder setDate(java.time.Instant value) {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder setDate(java.time.Instant value) {
       validate(fields()[6], value);
       this.date = value;
       fieldSetFlags()[6] = true;
@@ -661,7 +661,7 @@ static {
       * Clears the value of the 'date' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.EventPatientLocation.Builder clearDate() {
+    public ch.demo.gpietro.schema.avro.EventPatientLocation.Builder clearDate() {
       date = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -677,7 +677,7 @@ static {
         record.wardId = fieldSetFlags()[2] ? this.wardId : (java.lang.Long) defaultValue(fields()[2]);
         record.roomId = fieldSetFlags()[3] ? this.roomId : (java.lang.Long) defaultValue(fields()[3]);
         record.bedId = fieldSetFlags()[4] ? this.bedId : (java.lang.Long) defaultValue(fields()[4]);
-        record.status = fieldSetFlags()[5] ? this.status : (ch.demo.gpietro.schema.EncounterStatus) defaultValue(fields()[5]);
+        record.status = fieldSetFlags()[5] ? this.status : (ch.demo.gpietro.schema.avro.EncounterStatus) defaultValue(fields()[5]);
         record.date = fieldSetFlags()[6] ? this.date : (java.time.Instant) defaultValue(fields()[6]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {

@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package ch.demo.gpietro.schema;
+package ch.demo.gpietro.schema.avro;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class BoardLocation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 3288298723643709006L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BoardLocation\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"treatmentId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"first_name\",\"type\":\"string\"},{\"name\":\"last_name\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"},{\"name\":\"birth_date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
+  private static final long serialVersionUID = -7819397269712037859L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BoardLocation\",\"namespace\":\"ch.demo.gpietro.schema.avro\",\"fields\":[{\"name\":\"patientId\",\"type\":\"long\"},{\"name\":\"episodeOfCareId\",\"type\":\"long\"},{\"name\":\"wardId\",\"type\":\"long\"},{\"name\":\"roomId\",\"type\":\"long\"},{\"name\":\"bedId\",\"type\":\"long\"},{\"name\":\"first_name\",\"type\":\"string\"},{\"name\":\"last_name\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"},{\"name\":\"birth_date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -75,7 +75,7 @@ static {
   }
 
    private long patientId;
-   private long treatmentId;
+   private long episodeOfCareId;
    private long wardId;
    private long roomId;
    private long bedId;
@@ -94,7 +94,7 @@ static {
   /**
    * All-args constructor.
    * @param patientId The new value for patientId
-   * @param treatmentId The new value for treatmentId
+   * @param episodeOfCareId The new value for episodeOfCareId
    * @param wardId The new value for wardId
    * @param roomId The new value for roomId
    * @param bedId The new value for bedId
@@ -103,9 +103,9 @@ static {
    * @param status The new value for status
    * @param birth_date The new value for birth_date
    */
-  public BoardLocation(java.lang.Long patientId, java.lang.Long treatmentId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, java.lang.CharSequence first_name, java.lang.CharSequence last_name, java.lang.CharSequence status, java.time.Instant birth_date) {
+  public BoardLocation(java.lang.Long patientId, java.lang.Long episodeOfCareId, java.lang.Long wardId, java.lang.Long roomId, java.lang.Long bedId, java.lang.CharSequence first_name, java.lang.CharSequence last_name, java.lang.CharSequence status, java.time.Instant birth_date) {
     this.patientId = patientId;
-    this.treatmentId = treatmentId;
+    this.episodeOfCareId = episodeOfCareId;
     this.wardId = wardId;
     this.roomId = roomId;
     this.bedId = bedId;
@@ -121,7 +121,7 @@ static {
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return patientId;
-    case 1: return treatmentId;
+    case 1: return episodeOfCareId;
     case 2: return wardId;
     case 3: return roomId;
     case 4: return bedId;
@@ -138,7 +138,7 @@ static {
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: patientId = (java.lang.Long)value$; break;
-    case 1: treatmentId = (java.lang.Long)value$; break;
+    case 1: episodeOfCareId = (java.lang.Long)value$; break;
     case 2: wardId = (java.lang.Long)value$; break;
     case 3: roomId = (java.lang.Long)value$; break;
     case 4: bedId = (java.lang.Long)value$; break;
@@ -168,20 +168,20 @@ static {
   }
 
   /**
-   * Gets the value of the 'treatmentId' field.
-   * @return The value of the 'treatmentId' field.
+   * Gets the value of the 'episodeOfCareId' field.
+   * @return The value of the 'episodeOfCareId' field.
    */
-  public long getTreatmentId() {
-    return treatmentId;
+  public long getEpisodeOfCareId() {
+    return episodeOfCareId;
   }
 
 
   /**
-   * Sets the value of the 'treatmentId' field.
+   * Sets the value of the 'episodeOfCareId' field.
    * @param value the value to set.
    */
-  public void setTreatmentId(long value) {
-    this.treatmentId = value;
+  public void setEpisodeOfCareId(long value) {
+    this.episodeOfCareId = value;
   }
 
   /**
@@ -307,8 +307,8 @@ static {
    * Creates a new BoardLocation RecordBuilder.
    * @return A new BoardLocation RecordBuilder
    */
-  public static ch.demo.gpietro.schema.BoardLocation.Builder newBuilder() {
-    return new ch.demo.gpietro.schema.BoardLocation.Builder();
+  public static ch.demo.gpietro.schema.avro.BoardLocation.Builder newBuilder() {
+    return new ch.demo.gpietro.schema.avro.BoardLocation.Builder();
   }
 
   /**
@@ -316,11 +316,11 @@ static {
    * @param other The existing builder to copy.
    * @return A new BoardLocation RecordBuilder
    */
-  public static ch.demo.gpietro.schema.BoardLocation.Builder newBuilder(ch.demo.gpietro.schema.BoardLocation.Builder other) {
+  public static ch.demo.gpietro.schema.avro.BoardLocation.Builder newBuilder(ch.demo.gpietro.schema.avro.BoardLocation.Builder other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.BoardLocation.Builder();
+      return new ch.demo.gpietro.schema.avro.BoardLocation.Builder();
     } else {
-      return new ch.demo.gpietro.schema.BoardLocation.Builder(other);
+      return new ch.demo.gpietro.schema.avro.BoardLocation.Builder(other);
     }
   }
 
@@ -329,11 +329,11 @@ static {
    * @param other The existing instance to copy.
    * @return A new BoardLocation RecordBuilder
    */
-  public static ch.demo.gpietro.schema.BoardLocation.Builder newBuilder(ch.demo.gpietro.schema.BoardLocation other) {
+  public static ch.demo.gpietro.schema.avro.BoardLocation.Builder newBuilder(ch.demo.gpietro.schema.avro.BoardLocation other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.BoardLocation.Builder();
+      return new ch.demo.gpietro.schema.avro.BoardLocation.Builder();
     } else {
-      return new ch.demo.gpietro.schema.BoardLocation.Builder(other);
+      return new ch.demo.gpietro.schema.avro.BoardLocation.Builder(other);
     }
   }
 
@@ -345,7 +345,7 @@ static {
     implements org.apache.avro.data.RecordBuilder<BoardLocation> {
 
     private long patientId;
-    private long treatmentId;
+    private long episodeOfCareId;
     private long wardId;
     private long roomId;
     private long bedId;
@@ -363,14 +363,14 @@ static {
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ch.demo.gpietro.schema.BoardLocation.Builder other) {
+    private Builder(ch.demo.gpietro.schema.avro.BoardLocation.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.treatmentId)) {
-        this.treatmentId = data().deepCopy(fields()[1].schema(), other.treatmentId);
+      if (isValidValue(fields()[1], other.episodeOfCareId)) {
+        this.episodeOfCareId = data().deepCopy(fields()[1].schema(), other.episodeOfCareId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
       if (isValidValue(fields()[2], other.wardId)) {
@@ -407,14 +407,14 @@ static {
      * Creates a Builder by copying an existing BoardLocation instance
      * @param other The existing instance to copy.
      */
-    private Builder(ch.demo.gpietro.schema.BoardLocation other) {
+    private Builder(ch.demo.gpietro.schema.avro.BoardLocation other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.patientId)) {
         this.patientId = data().deepCopy(fields()[0].schema(), other.patientId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.treatmentId)) {
-        this.treatmentId = data().deepCopy(fields()[1].schema(), other.treatmentId);
+      if (isValidValue(fields()[1], other.episodeOfCareId)) {
+        this.episodeOfCareId = data().deepCopy(fields()[1].schema(), other.episodeOfCareId);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.wardId)) {
@@ -461,7 +461,7 @@ static {
       * @param value The value of 'patientId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setPatientId(long value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setPatientId(long value) {
       validate(fields()[0], value);
       this.patientId = value;
       fieldSetFlags()[0] = true;
@@ -481,46 +481,46 @@ static {
       * Clears the value of the 'patientId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearPatientId() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearPatientId() {
       fieldSetFlags()[0] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'treatmentId' field.
+      * Gets the value of the 'episodeOfCareId' field.
       * @return The value.
       */
-    public long getTreatmentId() {
-      return treatmentId;
+    public long getEpisodeOfCareId() {
+      return episodeOfCareId;
     }
 
 
     /**
-      * Sets the value of the 'treatmentId' field.
-      * @param value The value of 'treatmentId'.
+      * Sets the value of the 'episodeOfCareId' field.
+      * @param value The value of 'episodeOfCareId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setTreatmentId(long value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setEpisodeOfCareId(long value) {
       validate(fields()[1], value);
-      this.treatmentId = value;
+      this.episodeOfCareId = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'treatmentId' field has been set.
-      * @return True if the 'treatmentId' field has been set, false otherwise.
+      * Checks whether the 'episodeOfCareId' field has been set.
+      * @return True if the 'episodeOfCareId' field has been set, false otherwise.
       */
-    public boolean hasTreatmentId() {
+    public boolean hasEpisodeOfCareId() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'treatmentId' field.
+      * Clears the value of the 'episodeOfCareId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearTreatmentId() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearEpisodeOfCareId() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -539,7 +539,7 @@ static {
       * @param value The value of 'wardId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setWardId(long value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setWardId(long value) {
       validate(fields()[2], value);
       this.wardId = value;
       fieldSetFlags()[2] = true;
@@ -559,7 +559,7 @@ static {
       * Clears the value of the 'wardId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearWardId() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearWardId() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -578,7 +578,7 @@ static {
       * @param value The value of 'roomId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setRoomId(long value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setRoomId(long value) {
       validate(fields()[3], value);
       this.roomId = value;
       fieldSetFlags()[3] = true;
@@ -598,7 +598,7 @@ static {
       * Clears the value of the 'roomId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearRoomId() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearRoomId() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -617,7 +617,7 @@ static {
       * @param value The value of 'bedId'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setBedId(long value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setBedId(long value) {
       validate(fields()[4], value);
       this.bedId = value;
       fieldSetFlags()[4] = true;
@@ -637,7 +637,7 @@ static {
       * Clears the value of the 'bedId' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearBedId() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearBedId() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -656,7 +656,7 @@ static {
       * @param value The value of 'first_name'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setFirstName(java.lang.CharSequence value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setFirstName(java.lang.CharSequence value) {
       validate(fields()[5], value);
       this.first_name = value;
       fieldSetFlags()[5] = true;
@@ -676,7 +676,7 @@ static {
       * Clears the value of the 'first_name' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearFirstName() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearFirstName() {
       first_name = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -696,7 +696,7 @@ static {
       * @param value The value of 'last_name'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setLastName(java.lang.CharSequence value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setLastName(java.lang.CharSequence value) {
       validate(fields()[6], value);
       this.last_name = value;
       fieldSetFlags()[6] = true;
@@ -716,7 +716,7 @@ static {
       * Clears the value of the 'last_name' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearLastName() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearLastName() {
       last_name = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -736,7 +736,7 @@ static {
       * @param value The value of 'status'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setStatus(java.lang.CharSequence value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setStatus(java.lang.CharSequence value) {
       validate(fields()[7], value);
       this.status = value;
       fieldSetFlags()[7] = true;
@@ -756,7 +756,7 @@ static {
       * Clears the value of the 'status' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearStatus() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearStatus() {
       status = null;
       fieldSetFlags()[7] = false;
       return this;
@@ -776,7 +776,7 @@ static {
       * @param value The value of 'birth_date'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder setBirthDate(java.time.Instant value) {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder setBirthDate(java.time.Instant value) {
       validate(fields()[8], value);
       this.birth_date = value;
       fieldSetFlags()[8] = true;
@@ -796,7 +796,7 @@ static {
       * Clears the value of the 'birth_date' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.BoardLocation.Builder clearBirthDate() {
+    public ch.demo.gpietro.schema.avro.BoardLocation.Builder clearBirthDate() {
       birth_date = null;
       fieldSetFlags()[8] = false;
       return this;
@@ -808,7 +808,7 @@ static {
       try {
         BoardLocation record = new BoardLocation();
         record.patientId = fieldSetFlags()[0] ? this.patientId : (java.lang.Long) defaultValue(fields()[0]);
-        record.treatmentId = fieldSetFlags()[1] ? this.treatmentId : (java.lang.Long) defaultValue(fields()[1]);
+        record.episodeOfCareId = fieldSetFlags()[1] ? this.episodeOfCareId : (java.lang.Long) defaultValue(fields()[1]);
         record.wardId = fieldSetFlags()[2] ? this.wardId : (java.lang.Long) defaultValue(fields()[2]);
         record.roomId = fieldSetFlags()[3] ? this.roomId : (java.lang.Long) defaultValue(fields()[3]);
         record.bedId = fieldSetFlags()[4] ? this.bedId : (java.lang.Long) defaultValue(fields()[4]);

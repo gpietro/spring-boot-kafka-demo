@@ -26,13 +26,13 @@ spring.cloud.stream.kafka.streams:
     process-in-0:
       consumer:
         keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-        valueSerde: ch.demo.gpietro.serde.EventPatientLocationAvroSerde
+        valueSerde: ch.demo.gpietro.serde.avro.EventPatientLocationAvroSerde
     process-in-1:
       consumer:
         keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
-        valueSerde: ch.demo.gpietro.serde.PatientAvroSerde
+        valueSerde: ch.demo.gpietro.serde.avro.PatientAvroSerde
         materializedAs: ktable.patients
     process-out-0:
       producer:
         keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-        valueSerde: ch.demo.gpietro.serde.BoardLocationAvroSerde
+        valueSerde: ch.demo.gpietro.serde.json.BoardLocationJsonSerde

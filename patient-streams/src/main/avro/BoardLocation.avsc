@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "ch.demo.gpietro.schema",
+  "namespace": "ch.demo.gpietro.schema.avro",
   "name": "BoardLocation",
   "version": "1",
   "fields": [
@@ -9,7 +9,7 @@
       "type": "long"
     },
     {
-      "name": "treatmentId",
+      "name": "episodeOfCareId",
       "type": "long"
     },
     {

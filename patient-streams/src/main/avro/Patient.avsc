@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "Patient",
-  "namespace": "ch.demo.gpietro.schema",
+  "namespace": "ch.demo.gpietro.schema.avro",
   "fields": [
     {
       "name": "id",
@@ -35,12 +35,15 @@
     },
     {
       "name": "birth_date",
-      "type": ["null", {
-        "type": "long",
-        "connect.version": 1,
-        "connect.name": "org.apache.kafka.connect.data.Timestamp",
-        "logicalType": "timestamp-millis"
-      }]
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "connect.version": 1,
+          "connect.name": "org.apache.kafka.connect.data.Timestamp",
+          "logicalType": "timestamp-millis"
+        }
+      ]
     }
   ]
 }

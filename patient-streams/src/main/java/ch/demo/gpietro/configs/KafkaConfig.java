@@ -1,7 +1,7 @@
 package ch.demo.gpietro.configs;
 
-import ch.demo.gpietro.schema.BoardLocation;
-import ch.demo.gpietro.serde.BoardLocationAvroDeserializer;
+import ch.demo.gpietro.schema.json.BoardLocation;
+import ch.demo.gpietro.serde.json.BoardLocationJsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +33,10 @@ public class KafkaConfig {
         ReceiverOptions<String, BoardLocation> properties = ReceiverOptions.<String, BoardLocation>create()
                 .consumerProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServersConfig)
                 .consumerProperty(ConsumerConfig.GROUP_ID_CONFIG, "board")
-                .consumerProperty("schema.registry.url", schemaRegistryUrl)
+                .consumerProperty("schema.registry.url", "localhost:8081")
                 .subscription(Collections.singleton("board"))
                 .withKeyDeserializer(new StringDeserializer())
-                .withValueDeserializer(new BoardLocationAvroDeserializer());
+                .withValueDeserializer(new BoardLocationJsonDeserializer());
 
         return new ReactiveKafkaConsumerTemplate<>(properties);
     }

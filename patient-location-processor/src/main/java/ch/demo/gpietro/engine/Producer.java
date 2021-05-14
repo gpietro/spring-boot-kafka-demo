@@ -1,6 +1,6 @@
 package ch.demo.gpietro.engine;
 
-import ch.demo.gpietro.schema.*;
+import ch.demo.gpietro.schema.avro.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationStartedEvent;

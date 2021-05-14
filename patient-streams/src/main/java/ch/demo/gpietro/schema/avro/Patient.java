@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package ch.demo.gpietro.schema;
+package ch.demo.gpietro.schema.avro;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Patient extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8119558187414977749L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Patient\",\"namespace\":\"ch.demo.gpietro.schema\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"created_at\",\"type\":{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"updated_at\",\"type\":{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"first_name\",\"type\":\"string\"},{\"name\":\"last_name\",\"type\":\"string\"},{\"name\":\"birth_date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}]}");
+  private static final long serialVersionUID = -4822127828167754470L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Patient\",\"namespace\":\"ch.demo.gpietro.schema.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"created_at\",\"type\":{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"updated_at\",\"type\":{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"first_name\",\"type\":\"string\"},{\"name\":\"last_name\",\"type\":\"string\"},{\"name\":\"birth_date\",\"type\":[\"null\",{\"type\":\"long\",\"connect.version\":1,\"connect.name\":\"org.apache.kafka.connect.data.Timestamp\",\"logicalType\":\"timestamp-millis\"}]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -257,8 +257,8 @@ static {
    * Creates a new Patient RecordBuilder.
    * @return A new Patient RecordBuilder
    */
-  public static ch.demo.gpietro.schema.Patient.Builder newBuilder() {
-    return new ch.demo.gpietro.schema.Patient.Builder();
+  public static ch.demo.gpietro.schema.avro.Patient.Builder newBuilder() {
+    return new ch.demo.gpietro.schema.avro.Patient.Builder();
   }
 
   /**
@@ -266,11 +266,11 @@ static {
    * @param other The existing builder to copy.
    * @return A new Patient RecordBuilder
    */
-  public static ch.demo.gpietro.schema.Patient.Builder newBuilder(ch.demo.gpietro.schema.Patient.Builder other) {
+  public static ch.demo.gpietro.schema.avro.Patient.Builder newBuilder(ch.demo.gpietro.schema.avro.Patient.Builder other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.Patient.Builder();
+      return new ch.demo.gpietro.schema.avro.Patient.Builder();
     } else {
-      return new ch.demo.gpietro.schema.Patient.Builder(other);
+      return new ch.demo.gpietro.schema.avro.Patient.Builder(other);
     }
   }
 
@@ -279,11 +279,11 @@ static {
    * @param other The existing instance to copy.
    * @return A new Patient RecordBuilder
    */
-  public static ch.demo.gpietro.schema.Patient.Builder newBuilder(ch.demo.gpietro.schema.Patient other) {
+  public static ch.demo.gpietro.schema.avro.Patient.Builder newBuilder(ch.demo.gpietro.schema.avro.Patient other) {
     if (other == null) {
-      return new ch.demo.gpietro.schema.Patient.Builder();
+      return new ch.demo.gpietro.schema.avro.Patient.Builder();
     } else {
-      return new ch.demo.gpietro.schema.Patient.Builder(other);
+      return new ch.demo.gpietro.schema.avro.Patient.Builder(other);
     }
   }
 
@@ -310,7 +310,7 @@ static {
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(ch.demo.gpietro.schema.Patient.Builder other) {
+    private Builder(ch.demo.gpietro.schema.avro.Patient.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -342,7 +342,7 @@ static {
      * Creates a Builder by copying an existing Patient instance
      * @param other The existing instance to copy.
      */
-    private Builder(ch.demo.gpietro.schema.Patient other) {
+    private Builder(ch.demo.gpietro.schema.avro.Patient other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -384,7 +384,7 @@ static {
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder setId(long value) {
+    public ch.demo.gpietro.schema.avro.Patient.Builder setId(long value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -404,7 +404,7 @@ static {
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder clearId() {
+    public ch.demo.gpietro.schema.avro.Patient.Builder clearId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -423,7 +423,7 @@ static {
       * @param value The value of 'created_at'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder setCreatedAt(java.time.Instant value) {
+    public ch.demo.gpietro.schema.avro.Patient.Builder setCreatedAt(java.time.Instant value) {
       validate(fields()[1], value);
       this.created_at = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[1] = true;
@@ -443,7 +443,7 @@ static {
       * Clears the value of the 'created_at' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder clearCreatedAt() {
+    public ch.demo.gpietro.schema.avro.Patient.Builder clearCreatedAt() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -462,7 +462,7 @@ static {
       * @param value The value of 'updated_at'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder setUpdatedAt(java.time.Instant value) {
+    public ch.demo.gpietro.schema.avro.Patient.Builder setUpdatedAt(java.time.Instant value) {
       validate(fields()[2], value);
       this.updated_at = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[2] = true;
@@ -482,7 +482,7 @@ static {
       * Clears the value of the 'updated_at' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder clearUpdatedAt() {
+    public ch.demo.gpietro.schema.avro.Patient.Builder clearUpdatedAt() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -501,7 +501,7 @@ static {
       * @param value The value of 'first_name'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder setFirstName(java.lang.CharSequence value) {
+    public ch.demo.gpietro.schema.avro.Patient.Builder setFirstName(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.first_name = value;
       fieldSetFlags()[3] = true;
@@ -521,7 +521,7 @@ static {
       * Clears the value of the 'first_name' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder clearFirstName() {
+    public ch.demo.gpietro.schema.avro.Patient.Builder clearFirstName() {
       first_name = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -541,7 +541,7 @@ static {
       * @param value The value of 'last_name'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder setLastName(java.lang.CharSequence value) {
+    public ch.demo.gpietro.schema.avro.Patient.Builder setLastName(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.last_name = value;
       fieldSetFlags()[4] = true;
@@ -561,7 +561,7 @@ static {
       * Clears the value of the 'last_name' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder clearLastName() {
+    public ch.demo.gpietro.schema.avro.Patient.Builder clearLastName() {
       last_name = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -581,7 +581,7 @@ static {
       * @param value The value of 'birth_date'.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder setBirthDate(java.time.Instant value) {
+    public ch.demo.gpietro.schema.avro.Patient.Builder setBirthDate(java.time.Instant value) {
       validate(fields()[5], value);
       this.birth_date = value;
       fieldSetFlags()[5] = true;
@@ -601,7 +601,7 @@ static {
       * Clears the value of the 'birth_date' field.
       * @return This builder.
       */
-    public ch.demo.gpietro.schema.Patient.Builder clearBirthDate() {
+    public ch.demo.gpietro.schema.avro.Patient.Builder clearBirthDate() {
       birth_date = null;
       fieldSetFlags()[5] = false;
       return this;

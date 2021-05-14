@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "ch.demo.gpietro.schema",
+  "namespace": "ch.demo.gpietro.schema.avro",
   "name": "EventPatientCheckedOut",
   "version": "1",
   "fields": [
