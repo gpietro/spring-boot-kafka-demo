@@ -14,3 +14,12 @@ This PoC aims to evaluate the usage of Kafka for event sourcing in the developme
 - `docker exec -it ksqldb-cli ksql http://ksqldb-server:8088`
 - `show topics;`
 - `print 'topic-name' FROM BEGINNING;`
+
+### Application schema
+![Application schema](https://raw.githubusercontent.com/gpietro/spring-boot-kafka-demo/master/app-schema.png)
+
+
+### Todo
+- Avro Deserialization in ReactiveKafkaConsumerTemplate is not working. NullPointerException is thrown.
+- React front-end application
+- Deserialize timestamp to java Date
